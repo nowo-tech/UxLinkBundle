@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-07-08
+
+### Fixed
+
+- CI: run full `composer update` when no lock file is present (Composer 2 rejects partial updates without a lock file).
+- CI: stop forcing `symfony/ux-twig-component:^3.0`, which requires PHP ≥ 8.4 and broke PHP 8.2/8.3 matrix jobs.
+
 ## [1.0.0] - 2026-07-08
 
 ### Added
