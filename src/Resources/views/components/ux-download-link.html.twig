@@ -1,0 +1,23 @@
+<div class="ux-download-link">
+    <a href="{{ link.url }}"
+       class="ux-download-link__anchor"
+       {% if link.attributes.download %}download="{{ link.attributes.download }}"{% endif %}
+       {% for name, value in link.attributes.toArray() %}
+           {% if name != 'download' %} {{ name }}="{{ value }}"{% endif %}
+       {% endfor %}
+    >
+        {% if link.icon %}
+            <span class="ux-download-link__icon" aria-hidden="true" data-icon="{{ link.icon }}"></span>
+        {% endif %}
+        <span class="ux-download-link__label">{{ link.label }}</span>
+        {% if this.humanSize() %}
+            <span class="ux-download-link__size">({{ this.humanSize() }})</span>
+        {% endif %}
+        {% if link.metadata.mimeType is defined %}
+            <span class="ux-download-link__mime">{{ link.metadata.mimeType }}</span>
+        {% endif %}
+    </a>
+    {% if link.metadata.description is defined %}
+        <p class="ux-download-link__description">{{ link.metadata.description }}</p>
+    {% endif %}
+</div>

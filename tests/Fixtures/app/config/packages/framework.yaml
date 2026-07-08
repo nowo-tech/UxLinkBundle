@@ -1,0 +1,9 @@
+framework:
+    secret: test
+    test: true
+    translator:
+        enabled: true
+        fallbacks: ['en']
+
+twig:
+    strict_variables: true

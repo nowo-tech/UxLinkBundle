@@ -1,0 +1,8 @@
+<a href="{{ link.url }}"{% for name, value in attributes %} {{ name }}="{{ value }}"{% endfor %}>
+    {%- if show_icon and link.icon -%}
+        <span class="ux-link__icon" aria-hidden="true" data-icon="{{ link.icon }}"></span>
+    {%- endif -%}
+    {%- if show_label and link.label -%}
+        <span class="ux-link__label">{{ link.label }}</span>
+    {%- endif -%}
+</a>

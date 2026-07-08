@@ -1,0 +1,18 @@
+contact.whatsapp.label: 'Contact on WhatsApp'
+contact.email.label: 'Send email'
+contact.telephone.label: 'Call'
+contact.sms.label: 'Send SMS'
+
+share.linkedin.label: 'Share on LinkedIn'
+share.x.label: 'Share on X'
+share.whatsapp.label: 'Share on WhatsApp'
+share.telegram.label: 'Share on Telegram'
+share.email.label: 'Share by email'
+share.collection.label: 'Share this page'
+
+map.google_maps.label: 'Open in Google Maps'
+map.apple_maps.label: 'Open in Apple Maps'
+map.waze.label: 'Open in Waze'
+map.openstreetmap.label: 'Open in OpenStreetMap'
+
+download.download.label: 'Download file'

@@ -1,0 +1,18 @@
+contact.whatsapp.label: 'Contacter sur WhatsApp'
+contact.email.label: 'Envoyer un email'
+contact.telephone.label: 'Appeler'
+contact.sms.label: 'Envoyer un SMS'
+
+share.linkedin.label: 'Partager sur LinkedIn'
+share.x.label: 'Partager sur X'
+share.whatsapp.label: 'Partager sur WhatsApp'
+share.telegram.label: 'Partager sur Telegram'
+share.email.label: 'Partager par email'
+share.collection.label: 'Partager cette page'
+
+map.google_maps.label: 'Ouvrir dans Google Maps'
+map.apple_maps.label: 'Ouvrir dans Apple Maps'
+map.waze.label: 'Ouvrir dans Waze'
+map.openstreetmap.label: 'Ouvrir dans OpenStreetMap'
+
+download.download.label: 'Télécharger le fichier'

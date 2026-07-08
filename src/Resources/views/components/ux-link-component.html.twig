@@ -1,0 +1,8 @@
+{# Component template - variables provided by HtmlLinkRenderer and UxLink component #}
+{% set attributes = link.attributes.toArray() %}
+{% include '@NowoUxLinkBundle/components/ux-link.html.twig' with {
+    link: link,
+    attributes: attributes,
+    show_icon: true,
+    show_label: true,
+} only %}
