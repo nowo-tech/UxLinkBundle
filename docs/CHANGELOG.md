@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.3] - 2026-07-08
+
+### Changed
+
+- README: single-line canonical badges and Packagist/GitHub CTA blockquote (Nowo bundle standards REQ-DOCS-004, REQ-DOCS-009).
+- Makefile: REQ-MAKE-008 traceability comment on root `update-deps` target.
+- `.gitignore`: categorized patterns and `*.tar.gz` in the archives block (REQ-GITIGNORE-001).
+
 ## [1.0.2] - 2026-07-08
 
 ### Fixed

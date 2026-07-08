@@ -1,10 +1,19 @@
+# Dependencies
 /vendor/
-/.phpunit.cache/
+
+# Build outputs / coverage
 /coverage/
 /coverage.xml
 /coverage-php.txt
+
+# Caches / analysis
 /.php-cs-fixer.cache
+/.phpunit.cache/
+
+# Package manager locks (optional local)
 composer.lock
+
+# Symfony runtime (test fixtures)
 /tests/Fixtures/app/var/
 
 # Archives / compressed
@@ -13,5 +22,6 @@ composer.lock
 *.gz
 *.rar
 *.tar
+*.tar.gz
 *.tgz
 *.zip

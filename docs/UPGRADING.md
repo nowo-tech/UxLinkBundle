@@ -1,5 +1,13 @@
 # Upgrading
 
+## 1.0.2 → 1.0.3
+
+No action required. This patch release aligns the README and repository housekeeping with Nowo bundle standards.
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
+
 ## 1.0.1 → 1.0.2
 
 No action required. This patch release fixes CI integration tests and improves documentation and translation validation tooling.
