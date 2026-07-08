@@ -13,7 +13,7 @@ help:
 	@echo ""
 	@echo "  up / down / down-dev / build / shell / install"
 	@echo "  test / test-coverage / cs-check / cs-fix / rector / phpstan / qa"
-	@echo "  release-check / composer-sync / validate / clean"
+	@echo "  validate-translations / release-check / composer-sync / validate / clean"
 
 build:
 	$(COMPOSE) build --no-cache
@@ -75,14 +75,13 @@ update: ensure-up
 validate: ensure-up
 	$(COMPOSE) exec -T $(SERVICE_PHP) composer validate --strict
 
-release-check: ensure-up composer-sync cs-fix cs-check rector-dry phpstan test-coverage release-check-demos
+release-check: ensure-up composer-sync cs-fix cs-check rector-dry phpstan test-coverage validate-translations release-check-demos
 
 release-check-demos:
 	@$(MAKE) -C demo release-check
 
-validate-translations:
-	@echo "Translation YAML in src/Resources/translations/"
-	@docker-compose exec -T php sh -c 'for f in src/Resources/translations/*.yaml; do php -r "yaml_parse_file(\$argv[1]);" "$$f" || exit 1; done'
+validate-translations: ensure-up
+	$(COMPOSE) exec -T $(SERVICE_PHP) php .scripts/validate-translation-keys.php
 
 update-deps: ensure-up
 	@docker-compose exec -T php composer update --no-interaction
@@ -95,9 +94,6 @@ composer-sync: ensure-up
 
 clean: ensure-up
 	$(COMPOSE) exec -T $(SERVICE_PHP) sh -c "rm -rf vendor .phpunit.cache coverage coverage.xml .php-cs-fixer.cache"
-
-validate-translations:
-	@echo "Translation files: src/Resources/translations/"
 
 assets:
 	@echo "No frontend assets in this bundle."

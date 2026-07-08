@@ -6,8 +6,8 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-777BB4?logo=php)](https://php.net)
 [![Symfony](https://img.shields.io/badge/Symfony-7.4%20%7C%208.0%20%7C%208.1%2B-000000?logo=symfony)](https://symfony.com)
-[![GitHub stars](https://img.shields.io/github/stars/nowo-tech/UxLinkBundle.svg?style=social&label=Star)](https://github.com/nowo-tech/UxLinkBundle)
-[![Coverage](https://img.shields.io/badge/Coverage-~100%25-green)](#tests-and-coverage)
+[![GitHub stars](https://img.shields.io/github/stars/nowo-tech/ux-link-bundle.svg?style=social&label=Star)](https://github.com/nowo-tech/UxLinkBundle)
+[![Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen)](#tests-and-coverage)
 
 Generate safe, extensible contact, share, map, and download links for Symfony applications.
 
@@ -62,7 +62,9 @@ echo $link->getUrl();
 - [Spec-driven development](docs/SPEC-DRIVEN-DEVELOPMENT.md)
 - [GitHub Spec Kit](docs/SPEC-KIT.md)
 
-FrankenPHP worker mode: Supported (see [DEMO-FRANKENPHP](docs/DEMO-FRANKENPHP.md)).
+### Additional documentation
+
+- [Demo with FrankenPHP](docs/DEMO-FRANKENPHP.md) (includes worker mode)
 
 ## Version information
 
@@ -84,6 +86,11 @@ make -C demo up-symfony8   # http://localhost:8048
 ```
 
 ## Tests and coverage
+
+- Tests: PHPUnit (unit + integration)
+- PHP: 100%
+- TS/JS: N/A
+- Python: N/A
 
 ```bash
 make test
