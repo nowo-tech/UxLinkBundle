@@ -47,13 +47,12 @@ jobs:
             symfony/translation:^${{ matrix.symfony }} \
             symfony/twig-bundle:^${{ matrix.symfony }} \
             symfony/yaml:^${{ matrix.symfony }} \
-            symfony/ux-twig-component:^3.0 \
             --no-interaction --no-update
           composer require --dev \
             symfony/browser-kit:^${{ matrix.symfony }} \
             symfony/phpunit-bridge:^${{ matrix.symfony }} \
             --no-interaction --no-update
-          composer update symfony/* --with-all-dependencies --no-interaction --prefer-dist
+          composer update --no-interaction --prefer-dist
 
       - run: composer test
 
@@ -69,5 +68,5 @@ jobs:
         with:
           php-version: '8.2'
           tools: composer:v2
-      - run: composer install --prefer-dist --no-progress
+      - run: composer update --no-interaction --prefer-dist --no-progress
       - run: composer cs-check
