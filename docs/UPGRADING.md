@@ -1,5 +1,13 @@
 # Upgrading
 
+## 1.0.1 → 1.0.2
+
+No action required. This patch release fixes CI integration tests and improves documentation and translation validation tooling.
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
+
 ## 1.0.0 → 1.0.1
 
 No action required. This patch release only fixes the GitHub Actions CI workflow.

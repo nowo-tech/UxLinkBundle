@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-07-08
+
+### Fixed
+
+- Integration tests: add `twig_component.defaults` to the test kernel fixture (required by UX Twig Component 3.x on PHP 8.4+ in CI).
+
+### Changed
+
+- Makefile: fix `validate-translations` (remove duplicate target) and validate translation key parity across seven locales.
+- Documentation: README coverage percentages and canonical badges; translation locales and overrides in `CONFIGURATION.md`; release security checklist (12.4.1) in `SECURITY.md`.
+- `.github/SECURITY.md`: mark `1.x` as supported.
+
 ## [1.0.1] - 2026-07-08
 
 ### Fixed
