@@ -1,0 +1,18 @@
+contact.whatsapp.label: 'Contact via WhatsApp'
+contact.email.label: 'E-mail versturen'
+contact.telephone.label: 'Bellen'
+contact.sms.label: 'SMS versturen'
+
+share.linkedin.label: 'Delen op LinkedIn'
+share.x.label: 'Delen op X'
+share.whatsapp.label: 'Delen op WhatsApp'
+share.telegram.label: 'Delen op Telegram'
+share.email.label: 'Delen via e-mail'
+share.collection.label: 'Deze pagina delen'
+
+map.google_maps.label: 'Openen in Google Maps'
+map.apple_maps.label: 'Openen in Apple Maps'
+map.waze.label: 'Openen in Waze'
+map.openstreetmap.label: 'Openen in OpenStreetMap'
+
+download.download.label: 'Bestand downloaden'

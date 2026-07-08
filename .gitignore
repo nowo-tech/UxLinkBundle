@@ -1,0 +1,17 @@
+/vendor/
+/.phpunit.cache/
+/coverage/
+/coverage.xml
+/coverage-php.txt
+/.php-cs-fixer.cache
+composer.lock
+/tests/Fixtures/app/var/
+
+# Archives / compressed
+*.7z
+*.bz2
+*.gz
+*.rar
+*.tar
+*.tgz
+*.zip

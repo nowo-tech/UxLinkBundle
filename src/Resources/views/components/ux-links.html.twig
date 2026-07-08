@@ -1,0 +1,12 @@
+<ul class="ux-links" role="list">
+    {% for link in links %}
+        <li class="ux-links__item">
+            {% include '@NowoUxLinkBundle/components/ux-link.html.twig' with {
+                link: link,
+                attributes: link.attributes.toArray(),
+                show_icon: true,
+                show_label: true,
+            } only %}
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,14 @@
+<nav class="ux-share-links" aria-label="{{ 'share.collection.label'|trans({}, 'NowoUxLinkBundle') }}">
+    <ul class="ux-share-links__list" role="list">
+        {% for link in links %}
+            <li class="ux-share-links__item">
+                {% include '@NowoUxLinkBundle/components/ux-link.html.twig' with {
+                    link: link,
+                    attributes: link.attributes.toArray(),
+                    show_icon: true,
+                    show_label: true,
+                } only %}
+            </li>
+        {% endfor %}
+    </ul>
+</nav>

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UX Link Bundle Demo{% endblock %}
+
+{% block body %}
+    <h1>UX Link Bundle Demo</h1>
+    <p>Symfony 7.4 + FrankenPHP — contact, share, map, and download link components.</p>
+
+    <section id="contact-whatsapp">
+        <h2>Contact — WhatsApp</h2>
+        <twig:UxLink
+            family="contact"
+            provider="whatsapp"
+            recipient="+34600111222"
+            message="Hello from the UX Link demo"
+        />
+    </section>
+
+    <section id="share-links">
+        <h2>Share links</h2>
+        <twig:UxShareLinks
+            url="https://example.com/article"
+            title="UX Link Bundle"
+            text="Check out this Symfony bundle"
+            :providers="['linkedin', 'x', 'whatsapp', 'telegram', 'email']"
+        />
+    </section>
+
+    <section id="map-link">
+        <h2>Map — OpenStreetMap</h2>
+        <twig:UxLink
+            family="map"
+            provider="openstreetmap"
+            :options="{ address: 'Madrid, Spain', label: 'Open in OpenStreetMap' }"
+        />
+    </section>
+
+    <section id="download-link">
+        <h2>Download</h2>
+        <twig:UxDownloadLink
+            url="https://example.com/sample.pdf"
+            filename="sample.pdf"
+            mimeType="application/pdf"
+            :size="204800"
+            label="Download sample PDF"
+            description="Example enriched download card from the demo."
+        />
+    </section>
+{% endblock %}
