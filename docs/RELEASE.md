@@ -14,8 +14,8 @@
 ## Tag example
 
 ```bash
-git tag -a v1.0.1 -m "Release v1.0.1 — CI fixes"
-git push origin v1.0.1
+git tag -a v1.0.2 -m "Release v1.0.2 — CI integration tests and docs"
+git push origin v1.0.2
 ```
 
 See `docs/CHANGELOG.md` for version notes.
