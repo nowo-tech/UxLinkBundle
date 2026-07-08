@@ -11,11 +11,11 @@
 7. GitHub Actions `release.yml` creates the GitHub release from the tag.
 8. Packagist picks up the new tag automatically.
 
-## Tag example (1.0.0)
+## Tag example
 
 ```bash
-git tag -a v1.0.0 -m "Release v1.0.0 — initial public release"
-git push origin v1.0.0
+git tag -a v1.0.1 -m "Release v1.0.1 — CI fixes"
+git push origin v1.0.1
 ```
 
 See `docs/CHANGELOG.md` for version notes.

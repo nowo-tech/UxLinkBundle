@@ -1,5 +1,13 @@
 # Upgrading
 
+## 1.0.0 → 1.0.1
+
+No action required. This patch release only fixes the GitHub Actions CI workflow.
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
+
 ## 1.0.0
 
 First public release — there is no prior version to migrate from.
