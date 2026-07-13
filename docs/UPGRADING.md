@@ -1,5 +1,13 @@
 # Upgrading
 
+## 1.0.3 → 1.0.4
+
+No action required. This patch release only updates repository housekeeping (`.gitignore` for local Cursor sandbox config).
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
+
 ## 1.0.2 → 1.0.3
 
 No action required. This patch release aligns the README and repository housekeeping with Nowo bundle standards.

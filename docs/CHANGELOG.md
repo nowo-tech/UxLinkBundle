@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4] - 2026-07-13
+
+### Changed
+
+- `.gitignore`: ignore `.cursor/sandbox.json` (machine-specific Cursor sandbox config; REQ-IDE-005).
+
 ## [1.0.3] - 2026-07-08
 
 ### Changed
