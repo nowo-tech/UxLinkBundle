@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.5] - 2026-07-16
+
+### Added
+
+- `CODE_OF_CONDUCT.md` (Contributor Covenant) and README / CONTRIBUTING links (REQ-DOCS-015).
+- REQ-GIT-001 hygiene: `.githooks/commit-msg`, `.scripts/check-no-cursor-coauthor.sh`, `.scripts/strip-cursor-coauthor-from-history.sh`, Cursor rule `01-git-commits.mdc`, and `docs/GITHUB_CI.md`.
+- CI job `git-hygiene` (full history) and Makefile targets `setup-hooks`, `check-no-cursor-coauthor`, `strip-cursor-coauthor-from-history` (wired into `release-check`).
+
+### Changed
+
+- `docs/RELEASE.md`: remind maintainers to re-run `make check-no-cursor-coauthor` after the release commit, before push.
+
 ## [1.0.4] - 2026-07-13
 
 ### Changed

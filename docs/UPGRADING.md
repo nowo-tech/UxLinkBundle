@@ -1,5 +1,16 @@
 # Upgrading
 
+## 1.0.4 → 1.0.5
+
+No action required for application integrators. This patch adds repository community standards and Git/CI hygiene (Code of Conduct, REQ-GIT-001).
+
+Contributors cloning the repo should install hooks once:
+
+```bash
+composer update nowo-tech/ux-link-bundle
+make setup-hooks
+```
+
 ## 1.0.3 → 1.0.4
 
 No action required. This patch release only updates repository housekeeping (`.gitignore` for local Cursor sandbox config).

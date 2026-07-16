@@ -14,8 +14,10 @@
 ## Tag example
 
 ```bash
-git tag -a v1.0.4 -m "Release v1.0.4 — Cursor sandbox gitignore (REQ-IDE-005)"
-git push origin v1.0.4
+git tag -a v1.0.5 -m "Release v1.0.5 — Code of Conduct and REQ-GIT-001 hygiene"
+git push origin v1.0.5
 ```
 
 See `docs/CHANGELOG.md` for version notes.
+
+After creating the release commit and tag, run `make check-no-cursor-coauthor` again **before** `git push` (REQ-GIT-001). The release commit itself is not covered by an earlier `release-check` run.
