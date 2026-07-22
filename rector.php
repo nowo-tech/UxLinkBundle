@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use Rector\DeadCode\Rector\ClassMethod\RemoveReturnTagIncompatibleWithNativeTypeRector;
 use Rector\Symfony\Symfony73\Rector\Class_\GetFunctionsToAsTwigFunctionAttributeRector;
 use Rector\ValueObject\PhpVersion;
 
@@ -21,6 +22,10 @@ return RectorConfig::configure()
     ->withSkip([
         __DIR__ . '/vendor',
         __DIR__ . '/tests/Fixtures',
+        // Keep narrowed PHPStan @return (e.g. non-empty-lowercase-string) on public contracts.
+        RemoveReturnTagIncompatibleWithNativeTypeRector::class => [
+            __DIR__ . '/src/Contract/LinkProviderInterface.php',
+        ],
         GetFunctionsToAsTwigFunctionAttributeRector::class => [
             __DIR__ . '/src/Twig/UxLinkExtension.php',
         ],

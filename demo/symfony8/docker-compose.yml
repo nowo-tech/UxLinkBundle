@@ -20,6 +20,7 @@ services:
       - APP_ENV=${APP_ENV:-dev}
       - APP_DEBUG=${APP_DEBUG:-1}
       - APP_SECRET=${APP_SECRET:-demo-secret}
+      - FRANKENPHP_MODE=${FRANKENPHP_MODE:-worker}
       - TRUSTED_PROXIES=${TRUSTED_PROXIES:-127.0.0.1,REMOTE_ADDR}
       - DEFAULT_URI=${DEFAULT_URI:-http://localhost}
     # Mitigate Docker/WSL DNS failures resolving repo.packagist.org (composer curl error 6).

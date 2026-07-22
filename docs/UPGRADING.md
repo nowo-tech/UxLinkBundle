@@ -1,5 +1,15 @@
 # Upgrading
 
+## 1.0.5 → 1.0.6
+
+No action required for application integrators. This patch improves FrankenPHP demos (`FRANKENPHP_MODE`), PHP-CS-Fixer rules, and CI housekeeping.
+
+If you run the bundled demos and previously relied on `APP_ENV=dev` to switch to classic (non-worker) FrankenPHP, set `FRANKENPHP_MODE=classic` in the demo `.env` instead, then recreate the container (`docker compose up -d` / `make up`).
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
+
 ## 1.0.4 → 1.0.5
 
 No action required for application integrators. This patch adds repository community standards and Git/CI hygiene (Code of Conduct, REQ-GIT-001).

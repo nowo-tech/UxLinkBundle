@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.6] - 2026-07-22
+
+### Added
+
+- FrankenPHP demos: `FRANKENPHP_MODE` (`worker`|`classic`) via `.env` / Compose, with dedicated `docker/entrypoint.sh` (REQ-DEMO-010).
+- PHP-CS-Fixer: ordered imports, unused imports, and `fully_qualified_strict_types` with `import_symbols`.
+
+### Changed
+
+- `docs/DEMO-FRANKENPHP.md`: document classic vs worker switching and recreate-after-env guidance.
+- Rector: skip `RemoveReturnTagIncompatibleWithNativeTypeRector` on `LinkProviderInterface` to keep narrowed PHPStan `@return`.
+- CI: bump `actions/checkout` from 6 to 7.
+
+### Fixed
+
+- Integration test: import `Link` / `LinkFamily` instead of fully-qualified class names (CS Fixer alignment).
+
 ## [1.0.5] - 2026-07-16
 
 ### Added

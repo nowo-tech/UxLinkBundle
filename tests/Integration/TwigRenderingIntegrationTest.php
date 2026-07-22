@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Nowo\UxLinkBundle\Tests\Integration;
 
+use Nowo\UxLinkBundle\Enum\LinkFamily;
+use Nowo\UxLinkBundle\Model\Link;
 use Nowo\UxLinkBundle\Tests\Kernel\TestKernel;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -27,8 +29,8 @@ final class TwigRenderingIntegrationTest extends KernelTestCase
         $twig = self::getContainer()->get('twig');
 
         $html = $twig->render('@NowoUxLinkBundle/components/ux-link.html.twig', [
-            'link' => new \Nowo\UxLinkBundle\Model\Link(
-                \Nowo\UxLinkBundle\Enum\LinkFamily::Contact,
+            'link' => new Link(
+                LinkFamily::Contact,
                 'email',
                 'mailto:a@b.com',
                 label: 'Send <script>',
