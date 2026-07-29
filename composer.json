@@ -12,9 +12,11 @@
         "whatsapp",
         "maps",
         "twig",
-        "twig-component"
+        "twig-component",
+        "php",
+        "frankenphp"
     ],
-    "homepage": "https://github.com/nowo-tech/UxLinkBundle",
+    "homepage": "https://packagist.org/packages/nowo-tech/ux-link-bundle",
     "support": {
         "issues": "https://github.com/nowo-tech/UxLinkBundle/issues",
         "source": "https://github.com/nowo-tech/UxLinkBundle",
@@ -23,7 +25,7 @@
     },
     "authors": [
         {
-            "name": "Héctor Franco Aceituno",
+            "name": "H\u00e9ctor Franco Aceituno",
             "email": "hectorfranco@nowo.tech",
             "homepage": "https://github.com/HecFranco",
             "role": "Developer"
@@ -46,6 +48,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
+        "nowo-tech/phpstan-frankenphp": "^1.0",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
@@ -66,7 +69,10 @@
         }
     },
     "archive": {
-        "exclude": ["/demo", "/.cursor"]
+        "exclude": [
+            "/demo",
+            "/.cursor"
+        ]
     },
     "config": {
         "sort-packages": true,

@@ -1,5 +1,5 @@
-# FrankenPHP - PHP 8.4 Alpine (fallback: dunglas/frankenphp:1-php8.2-alpine if 8.4 unavailable)
-FROM dunglas/frankenphp:1-php8.4-alpine
+# FrankenPHP - PHP 8.5 Alpine (REQ-DEMO-010)
+FROM dunglas/frankenphp:1-php8.5-alpine
 
 RUN apk add --no-cache git unzip bash curl
 RUN install-php-extensions intl zip

@@ -6,3 +6,7 @@ parameters:
     excludePaths:
         - tests/Fixtures/*
     reportUnmatchedIgnoredErrors: false
+
+includes:
+  - vendor/nowo-tech/phpstan-frankenphp/ruleset-classic.neon
+  - vendor/nowo-tech/phpstan-frankenphp/ruleset-worker.neon

@@ -1,10 +1,14 @@
+SHELL := /bin/bash
+
 # UX Link Bundle — root Makefile (Docker PHP service).
 
 COMPOSE_FILE := docker-compose.yml
-COMPOSE := docker-compose -f $(COMPOSE_FILE)
+# Prefer Compose V2 plugin (GitHub Actions / modern Docker Desktop); fall back to docker-compose V1 (REQ-MAKE-010).
+COMPOSE_BIN := $(shell docker compose version >/dev/null 2>&1 && echo "docker compose" || echo "docker-compose")
+COMPOSE     := $(COMPOSE_BIN) -f $(COMPOSE_FILE)
 SERVICE_PHP := php
 
-.PHONY: help up down down-dev build shell install test test-coverage cs-check cs-fix qa clean release-check release-check-demos composer-sync rector rector-dry phpstan update validate validate-translations assets update-deps check-no-cursor-coauthor strip-cursor-coauthor-from-history
+.PHONY: help up down down-dev build shell install test test-coverage test-coverage-100 coverage-check cs-check cs-fix qa clean release-check release-check-demos demo-smoke composer-sync rector rector-dry phpstan update validate validate-translations assets update-deps check-no-cursor-coauthor check-open-prs strip-cursor-coauthor-from-history setup-hooks
 
 help:
 	@echo "UX Link Bundle"
@@ -12,8 +16,8 @@ help:
 	@echo "Usage: make <target>"
 	@echo ""
 	@echo "  up / down / down-dev / build / shell / install"
-	@echo "  test / test-coverage / cs-check / cs-fix / rector / phpstan / qa"
-	@echo "  validate-translations / release-check / composer-sync / validate / clean"
+	@echo "  test / test-coverage / coverage-check / cs-check / cs-fix / rector / phpstan / qa"
+	@echo "  validate-translations / check-open-prs / demo-smoke / release-check"
 
 build:
 	$(COMPOSE) build --no-cache
@@ -51,6 +55,11 @@ test-coverage: ensure-up
 	@chmod +x .scripts/php-coverage-percent.sh
 	./.scripts/php-coverage-percent.sh coverage-php.txt
 
+test-coverage-100: test-coverage
+	$(COMPOSE) exec -T $(SERVICE_PHP) php scripts/check-coverage.php coverage.xml --min-percent=100
+
+coverage-check: test-coverage-100
+
 cs-check: ensure-up
 	$(COMPOSE) exec -T $(SERVICE_PHP) composer cs-check
 
@@ -75,7 +84,7 @@ update: ensure-up
 validate: ensure-up
 	$(COMPOSE) exec -T $(SERVICE_PHP) composer validate --strict
 
-release-check: check-no-cursor-coauthor ensure-up composer-sync cs-fix cs-check rector-dry phpstan test-coverage validate-translations release-check-demos
+release-check: check-no-cursor-coauthor check-open-prs ensure-up composer-sync cs-check rector-dry phpstan validate-translations coverage-check release-check-demos
 
 release-check-demos:
 	@$(MAKE) -C demo release-check
@@ -92,7 +101,7 @@ setup-hooks:
 
 # REQ-MAKE-008: update-deps (REQ-MAKE-008)
 update-deps: ensure-up
-	@docker-compose exec -T php composer update --no-interaction
+	@$(COMPOSE) exec -T php composer update --no-interaction
 	@$(MAKE) -C demo/symfony7 update-deps 2>/dev/null || $(MAKE) -C demo/symfony7 update-bundle
 	@$(MAKE) -C demo/symfony8 update-deps 2>/dev/null || $(MAKE) -C demo/symfony8 update-bundle
 
@@ -108,6 +117,13 @@ assets:
 check-no-cursor-coauthor:
 	@chmod +x .scripts/check-no-cursor-coauthor.sh
 	@./.scripts/check-no-cursor-coauthor.sh HEAD
+
+check-open-prs:
+	@chmod +x .scripts/check-open-prs.sh
+	@GH_REPO=nowo-tech/UxLinkBundle ./.scripts/check-open-prs.sh
+
+demo-smoke:
+	@if [ -f demo/Makefile ]; then $(MAKE) -C demo release-check; else echo "No demo/Makefile — skip demo-smoke"; fi
 
 strip-cursor-coauthor-from-history:
 	@chmod +x .scripts/strip-cursor-coauthor-from-history.sh

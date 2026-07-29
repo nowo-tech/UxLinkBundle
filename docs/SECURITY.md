@@ -41,6 +41,7 @@ Before each release, confirm:
 | No custom cryptography in the bundle (link generation only) | ☐ |
 | Custom providers documented; apps review third-party URL schemes | ☐ |
 | No server-side HTTP calls in bundled providers (SSRF surface limited to client navigation) | ☐ |
+| **AI security audit (REQ-SEC-004)** | Pass (conditional) recorded in monorepo `BUNDLES_SECURITY_ANALYSIS.md` |
 
 ## Reporting
 

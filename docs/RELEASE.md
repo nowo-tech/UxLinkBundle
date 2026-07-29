@@ -14,6 +14,13 @@
 ## Tag example
 
 ```bash
+git tag -a v1.0.7 -m "Release v1.0.7 — FrankenPHP banner, release-check gates, demo php8.5"
+git push origin v1.0.7
+```
+
+Example for v1.0.6:
+
+```bash
 git tag -a v1.0.6 -m "Release v1.0.6 — FrankenPHP mode switch and CS Fixer hygiene"
 git push origin v1.0.6
 ```

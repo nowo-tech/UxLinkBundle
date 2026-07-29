@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.7] - 2026-07-29
+
+### Added
+
+- `make check-open-prs`, `coverage-check` / `test-coverage-100`, `demo-smoke`; `release-check` wires REQ-MAKE-002.
+- `SYMFONY_DEPRECATIONS_HELPER=max[direct]=0` (REQ-SF-005).
+- FrankenPHP Friendly banner (`docs/images/frankenphp-friendly.png`) — REQ-DOCS-017.
+- `docs/SECURITY.md` 12.4.1 row for REQ-SEC-004 Pass (conditional).
+
+### Changed
+
+- Demo Symfony 8 image `dunglas/frankenphp:1-php8.5-alpine` (REQ-DEMO-010).
+- Packagist homepage + GitHub About topics (REQ-DOCS-018).
+
 ## [1.0.6] - 2026-07-22
 
 ### Added

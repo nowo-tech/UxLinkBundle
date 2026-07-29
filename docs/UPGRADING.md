@@ -1,5 +1,13 @@
 # Upgrading
 
+## 1.0.6 → 1.0.7
+
+No action required for application integrators. This patch adds maintainer tooling (`check-open-prs`, `demo-smoke`, coverage gate), FrankenPHP Friendly docs banner, PHPUnit deprecation helper, and Packagist/About metadata.
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
+
 ## 1.0.5 → 1.0.6
 
 No action required for application integrators. This patch improves FrankenPHP demos (`FRANKENPHP_MODE`), PHP-CS-Fixer rules, and CI housekeeping.

@@ -6,6 +6,22 @@
 
 Generate safe, extensible contact, share, map, and download links for Symfony applications.
 
+![FrankenPHP Friendly Worker Mode](docs/images/frankenphp-friendly.png)
+
+This bundle is **FrankenPHP worker mode friendly**.
+
+## Version information
+
+| Version | PHP | Symfony | Status |
+|---------|-----|---------|--------|
+| 1.0.x | >= 8.2 | 7.0 – 8.1+ | Supported |
+
+Install a specific release:
+
+```bash
+composer require nowo-tech/ux-link-bundle:^1.0
+```
+
 ## Installation
 
 ```bash
@@ -43,6 +59,13 @@ echo $link->getUrl();
 <twig:UxLink family="contact" provider="whatsapp" recipient="+34600111222" message="Hello" />
 ```
 
+## Demos
+
+```bash
+make -C demo up-symfony7   # http://localhost:8047
+make -C demo up-symfony8   # http://localhost:8048
+```
+
 ## Documentation
 
 - [GitHub Actions CI requirements](docs/GITHUB_CI.md)
@@ -62,25 +85,6 @@ echo $link->getUrl();
 ### Additional documentation
 
 - [Demo with FrankenPHP](docs/DEMO-FRANKENPHP.md) (includes worker mode)
-
-## Version information
-
-| Version | PHP | Symfony | Status |
-|---------|-----|---------|--------|
-| 1.0.x | >= 8.2 | 7.0 – 8.1+ | Supported |
-
-Install a specific release:
-
-```bash
-composer require nowo-tech/ux-link-bundle:^1.0
-```
-
-## Demos
-
-```bash
-make -C demo up-symfony7   # http://localhost:8047
-make -C demo up-symfony8   # http://localhost:8048
-```
 
 ## Tests and coverage
 
