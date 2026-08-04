@@ -84,3 +84,29 @@ nowo_ux_link:
 ```
 
 See [Installation](INSTALLATION.md) and [Configuration](CONFIGURATION.md) for full setup.
+
+## Unreleased
+
+## To 1.1.0
+
+From **1.0.7** — Adds required Twig Extra (REQ-TWIG-004) and Twig-CS-Fixer. Register TwigExtraBundle if Flex did not.
+
+```bash
+composer update nowo-tech/ux-link-bundle
+php bin/console cache:clear
+```
+
+### Twig Extra Bundle (REQ-TWIG-004)
+
+Hosts that render this bundle's Twig templates must install:
+
+```bash
+composer require twig/extra-bundle twig/string-extra
+```
+
+and enable `Twig\Extra\TwigExtraBundle\TwigExtraBundle`. Flex recipes usually register it automatically.
+
+### Twig-CS-Fixer (maintainers)
+
+Package maintainers: `composer twig:lint` / `composer twig:fix` use `.twig-cs-fixer.php` over `src/` (and `templates/` when present).
+
