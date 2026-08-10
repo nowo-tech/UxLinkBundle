@@ -27,4 +27,5 @@ return (new PhpCsFixer\Config())
             ->in(__DIR__ . '/src')
             ->in(__DIR__ . '/tests')
             ->exclude(['Fixtures/app/var'])
+            ->notName('reference.php')
     );
