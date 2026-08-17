@@ -14,12 +14,13 @@ This bundle is **FrankenPHP worker mode friendly**.
 
 | Version | PHP | Symfony | Status |
 |---------|-----|---------|--------|
+| 1.1.x | >= 8.2 | 7.0 – 8.1+ | Supported |
 | 1.0.x | >= 8.2 | 7.0 – 8.1+ | Supported |
 
 Install a specific release:
 
 ```bash
-composer require nowo-tech/ux-link-bundle:^1.0
+composer require nowo-tech/ux-link-bundle:^1.1
 ```
 
 ## Installation
