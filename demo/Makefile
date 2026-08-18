@@ -1,39 +1,27 @@
-# Demo aggregate — Symfony 7 and 8 (UX Link Bundle).
+# Demo aggregate — Symfony 8 (UX Link Bundle).
 
-DEMOS := symfony7 symfony8
+DEMOS := symfony8
 
 .PHONY: help clean test-all verify-all release-check release-verify
 .PHONY: $(foreach d,$(DEMOS),up-$d down-$d update-bundle-$d verify-$d)
 .PHONY: up down update-bundle
 
 help:
-	@echo "UX Link Bundle — Demos (Symfony 7 & 8)"
-	@echo "  make up DEMO=symfony7|symfony8   (or up-symfony7 / up-symfony8)"
-	@echo "  make down DEMO=symfony7|symfony8"
-	@echo "  make update-bundle DEMO=symfony7|symfony8"
+	@echo "UX Link Bundle — Demo (Symfony 8)"
+	@echo "  make up DEMO=symfony8   (or up-symfony8)"
+	@echo "  make down DEMO=symfony8"
+	@echo "  make update-bundle DEMO=symfony8"
 	@echo "  make verify-all | test-all | release-check"
-	@echo "  Ports: 8047 (symfony7), 8048 (symfony8)"
-
-up-symfony7:
-	@$(MAKE) -C symfony7 up
+	@echo "  Port: 8048 (symfony8)"
 
 up-symfony8:
 	@$(MAKE) -C symfony8 up
 
-down-symfony7:
-	@$(MAKE) -C symfony7 down
-
 down-symfony8:
 	@$(MAKE) -C symfony8 down
 
-update-bundle-symfony7:
-	@$(MAKE) -C symfony7 update-bundle
-
 update-bundle-symfony8:
 	@$(MAKE) -C symfony8 update-bundle
-
-verify-symfony7:
-	@$(MAKE) -C symfony7 verify
 
 verify-symfony8:
 	@$(MAKE) -C symfony8 verify
@@ -42,23 +30,21 @@ up:
 	@if [ -n "$(DEMO)" ]; then \
 		$(MAKE) up-$(DEMO); \
 	else \
-		$(MAKE) up-symfony7; \
+		$(MAKE) up-symfony8; \
 	fi
 
 down:
-	@[ -n "$(DEMO)" ] || { echo "Usage: make down DEMO=symfony7|symfony8"; exit 1; }
+	@[ -n "$(DEMO)" ] || { echo "Usage: make down DEMO=symfony8"; exit 1; }
 	@$(MAKE) down-$(DEMO)
 
 update-bundle:
-	@[ -n "$(DEMO)" ] || { echo "Usage: make update-bundle DEMO=symfony7|symfony8"; exit 1; }
+	@[ -n "$(DEMO)" ] || { echo "Usage: make update-bundle DEMO=symfony8"; exit 1; }
 	@$(MAKE) update-bundle-$(DEMO)
 
 test-all:
-	@$(MAKE) -C symfony7 test
 	@$(MAKE) -C symfony8 test
 
 verify-all:
-	@$(MAKE) verify-symfony7
 	@$(MAKE) verify-symfony8
 
 release-check: test-all release-verify
@@ -82,7 +68,6 @@ release-verify:
 clean:
 	@rm -rf $(addsuffix /vendor,$(DEMOS)) $(addsuffix /var,$(DEMOS)) $(addsuffix /.phpunit.cache,$(DEMOS))
 	@echo "Cleaned demos."
-
 
 # REQ-MAKE-008: update-deps-all (REQ-MAKE-008)
 BUNDLE_ROOT := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/..)

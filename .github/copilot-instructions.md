@@ -26,4 +26,4 @@ Use this when suggesting code, tests, documentation, or CI changes for **UX Link
 
 ### Demos
 
-- Demos use **FrankenPHP** (`demo/symfony7`, `demo/symfony8`). See `docs/DEMO-FRANKENPHP.md`.
+- Demos use **FrankenPHP** (`demo/symfony8`). See `docs/DEMO-FRANKENPHP.md`.

@@ -106,7 +106,6 @@ setup-hooks:
 # REQ-MAKE-008: update-deps (REQ-MAKE-008)
 update-deps: ensure-up
 	@$(COMPOSE) exec -T php composer update --no-interaction
-	@$(MAKE) -C demo/symfony7 update-deps 2>/dev/null || $(MAKE) -C demo/symfony7 update-bundle
 	@$(MAKE) -C demo/symfony8 update-deps 2>/dev/null || $(MAKE) -C demo/symfony8 update-bundle
 
 composer-sync: ensure-up

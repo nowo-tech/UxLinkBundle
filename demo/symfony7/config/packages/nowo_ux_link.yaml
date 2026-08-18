@@ -1,8 +1,0 @@
-nowo_ux_link:
-    defaults:
-        target: '_blank'
-        rel: 'noopener noreferrer'
-        show_icons: true
-    aliases:
-        share:
-            twitter: x

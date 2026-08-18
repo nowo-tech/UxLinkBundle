@@ -63,7 +63,7 @@ echo $link->getUrl();
 ## Demos
 
 ```bash
-make -C demo up-symfony7   # http://localhost:8047
+make -C demo up-symfony8   # http://localhost:8047
 make -C demo up-symfony8   # http://localhost:8048
 ```
 
