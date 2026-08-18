@@ -87,6 +87,15 @@ See [Installation](INSTALLATION.md) and [Configuration](CONFIGURATION.md) for fu
 
 ## Unreleased
 
+## To 1.1.1
+
+No application upgrade steps. **Demos only:** Hot Reload Bundle `^1.4` (FrankenPHP Mercure/`hot_reload`, `dev`/`test`). Shipped demos are Symfony 8 only (Symfony 6/7 demo apps removed).
+
+```bash
+composer update nowo-tech/ux-link-bundle
+php bin/console cache:clear
+```
+
 ## To 1.1.0
 
 From **1.0.7** — Adds required Twig Extra (REQ-TWIG-004) and Twig-CS-Fixer. Register TwigExtraBundle if Flex did not.
