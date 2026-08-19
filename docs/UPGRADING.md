@@ -87,6 +87,14 @@ See [Installation](INSTALLATION.md) and [Configuration](CONFIGURATION.md) for fu
 
 ## Unreleased
 
+## To 1.1.2
+
+No application upgrade steps.
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
+
 ## To 1.1.1
 
 No application upgrade steps. **Demos only:** Hot Reload Bundle `^1.4` (FrankenPHP Mercure/`hot_reload`, `dev`/`test`). Shipped demos are Symfony 8 only (Symfony 6/7 demo apps removed).
