@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [1.1.3] - 2026-08-24
+
+### Changed
+
+- **Docs:** PHP-FIG PSR evaluation (REQ-CS-007).
+
+### Notes
+
+- **No API or configuration changes** for integrators unless noted above.
+
+[1.1.3]: https://github.com/nowo-tech/UxLinkBundle/releases/tag/v1.1.3
+
 ## [1.1.2] - 2026-08-19
 
 ### Security

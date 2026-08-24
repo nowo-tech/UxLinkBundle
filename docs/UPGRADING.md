@@ -1,5 +1,27 @@
 # Upgrading
 
+## Table of contents
+
+- [From 1.1.2 to 1.1.3](#from-112-to-113)
+
+## From 1.1.2 to 1.1.3
+
+No breaking changes. **No application upgrade steps.**
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
+
+## From 1.1.2 to 1.1.3
+
+No breaking changes. **No application upgrade steps.**
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
+
+# Upgrading
+
 ## 1.0.6 → 1.0.7
 
 No action required for application integrators. This patch adds maintainer tooling (`check-open-prs`, `demo-smoke`, coverage gate), FrankenPHP Friendly docs banner, PHPUnit deprecation helper, and Packagist/About metadata.
