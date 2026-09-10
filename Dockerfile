@@ -1,5 +1,5 @@
-# PHP 8.2 Alpine for development and tests (no frontend)
-FROM php:8.2-cli-alpine
+# PHP 8.4 Alpine for development and tests (Symfony 8.x lock requires >=8.4)
+FROM php:8.4-cli-alpine
 
 RUN apk add --no-cache \
     git \
