@@ -37,3 +37,7 @@ volumes:
 networks:
   ux-link-bundle-demo-symfony-8-network:
     driver: bridge
+    ipam:
+      config:
+        # Explicit pool: host Docker may exhaust default 172.17–31.x address pools.
+        - subnet: 10.248.48.0/24

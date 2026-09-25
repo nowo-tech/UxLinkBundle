@@ -38,10 +38,18 @@ final class LinkProviderRegistryTest extends TestCase
     {
         $first = new WhatsappContactProvider();
         $second = new WhatsappContactProvider();
-        $registry = new LinkProviderRegistry([], new BundleConfiguration([], [], [], []));
-        $registry->add($first, 0);
-        $registry->add($second, 5);
+        $config = new BundleConfiguration([], [], ['contact' => ['whatsapp' => ['priority' => 5]]], []);
+        $registry = new LinkProviderRegistry([$first, $second], $config);
 
         self::assertSame($second, $registry->get(LinkFamily::Contact, 'whatsapp'));
+    }
+
+    public function testSkipsDuplicateWhenPriorityNotHigher(): void
+    {
+        $first = new WhatsappContactProvider();
+        $second = new WhatsappContactProvider();
+        $registry = new LinkProviderRegistry([$first, $second], new BundleConfiguration([], [], [], []));
+
+        self::assertSame($first, $registry->get(LinkFamily::Contact, 'whatsapp'));
     }
 }

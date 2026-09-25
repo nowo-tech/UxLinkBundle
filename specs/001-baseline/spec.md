@@ -70,6 +70,11 @@ As a frontend developer, I embed `<twig:ux-link>`, share grids, and download com
 - **FR-I18N-004**: Seven locale translation files.
 - **FR-DI-001 / FR-DI-002**: PHP service definitions and Twig path compiler pass.
 
+### FrankenPHP worker mode
+
+- **FR-WORKER-001**: Shared services must not retain per-request state when the kernel is not reset between FrankenPHP worker requests (`reset_kernel` false / no `services_resetter`). Twig components with render state must be non-shared (`share(false)`). Provider registration is constructor-only.
+- **FR-WORKER-002**: Document and maintain `docs/FRANKENPHP-WORKER-AUDIT.md` with a **PASS** verdict under scenario B after each release that touches shared services.
+
 ---
 
 ## Success Criteria

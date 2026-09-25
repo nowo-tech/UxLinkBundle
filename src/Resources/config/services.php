@@ -51,8 +51,9 @@ return static function (ContainerConfigurator $container): void {
 
     $services->set(UxLinkExtension::class)->tag('twig.extension');
 
-    $services->set(Component\UxLink::class);
-    $services->set(Component\UxLinks::class);
-    $services->set(Component\UxShareLinks::class);
-    $services->set(Component\UxDownloadLink::class);
+    // Explicit non-shared: per-render state in mount() must not survive across FrankenPHP worker requests.
+    $services->set(Component\UxLink::class)->share(false);
+    $services->set(Component\UxLinks::class)->share(false);
+    $services->set(Component\UxShareLinks::class)->share(false);
+    $services->set(Component\UxDownloadLink::class)->share(false);
 };

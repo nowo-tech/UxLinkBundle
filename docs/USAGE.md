@@ -29,7 +29,11 @@ $link = $linkFactory->create('share', 'linkedin', ['url' => 'https://example.com
 
 ## Custom providers
 
-Implement `LinkProviderInterface` and tag the service with `nowo_ux_link.provider`.
+Implement `LinkProviderInterface` and tag the service with `nowo_ux_link.provider` (or `#[AsLinkProvider]`). Do **not** mutate `LinkProviderRegistry` at runtime — registration is constructor-only (FrankenPHP worker safe).
+
+## FrankenPHP worker mode
+
+This bundle is safe with FrankenPHP worker mode when the kernel is **not** reset between requests. See [FRANKENPHP-WORKER-AUDIT.md](FRANKENPHP-WORKER-AUDIT.md).
 
 ## Overriding templates (REQ-TWIG-001)
 

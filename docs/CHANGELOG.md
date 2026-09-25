@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.4] - 2026-09-25
+
+### Changed
+
+- **FrankenPHP worker (scenario B):** `LinkProviderRegistry` registration is constructor-only (`register()` private); Twig components explicitly `share(false)` in DI (FR-WORKER-001).
+- **Docs / specs:** `docs/FRANKENPHP-WORKER-AUDIT.md` PASS verdict; FR-WORKER-001/002 in baseline spec; USAGE / DEMO / README / UPGRADING aligned.
+- **Demos:** pin FrankenPHP demo Compose network to `10.248.48.0/24` to avoid exhausted default Docker address pools.
+
+### Notes
+
+- **No action** for integrators using tagged providers. Calling `LinkProviderRegistry::add()` at runtime is no longer possible (was undocumented).
+
+[1.1.4]: https://github.com/nowo-tech/UxLinkBundle/releases/tag/v1.1.4
 
 ## [1.1.3] - 2026-08-24
 

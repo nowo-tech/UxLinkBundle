@@ -17,7 +17,7 @@ final class TestKernel extends Kernel
 
     public function getProjectDir(): string
     {
-        return \dirname(__DIR__).'/Fixtures/app';
+        return __DIR__.'/../Fixtures/app';
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void

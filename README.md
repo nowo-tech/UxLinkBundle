@@ -8,7 +8,7 @@ Generate safe, extensible contact, share, map, and download links for Symfony ap
 
 ![FrankenPHP Friendly Worker Mode](docs/images/frankenphp-friendly.png)
 
-This bundle is **FrankenPHP worker mode friendly**.
+This bundle is **FrankenPHP worker mode friendly** (including `reset_kernel: false`). See the [worker audit](docs/FRANKENPHP-WORKER-AUDIT.md).
 
 ## Version information
 
@@ -63,7 +63,6 @@ echo $link->getUrl();
 ## Demos
 
 ```bash
-make -C demo up-symfony8   # http://localhost:8047
 make -C demo up-symfony8   # http://localhost:8048
 ```
 
@@ -80,6 +79,7 @@ make -C demo up-symfony8   # http://localhost:8048
 - [Upgrading](docs/UPGRADING.md)
 - [Release](docs/RELEASE.md)
 - [Security](docs/SECURITY.md)
+- [FrankenPHP worker audit](docs/FRANKENPHP-WORKER-AUDIT.md)
 - [Engram](docs/ENGRAM.md)
 - [Spec-driven development](docs/SPEC-DRIVEN-DEVELOPMENT.md)
 - [GitHub Spec Kit](docs/SPEC-KIT.md)

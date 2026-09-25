@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveReturnTagIncompatibleWithNativeTypeRector;
-use Rector\Symfony\Symfony73\Rector\Class_\GetFunctionsToAsTwigFunctionAttributeRector;
+use Rector\Symfony\Symfony73\Rector\Class_\GetFiltersAndFunctionsToAsTwigAttributeRector;
 use Rector\ValueObject\PhpVersion;
 
 return RectorConfig::configure()
@@ -26,7 +26,8 @@ return RectorConfig::configure()
         RemoveReturnTagIncompatibleWithNativeTypeRector::class => [
             __DIR__ . '/src/Contract/LinkProviderInterface.php',
         ],
-        GetFunctionsToAsTwigFunctionAttributeRector::class => [
+        // Keep AbstractExtension + getFunctions() registration (Twig attribute migration optional).
+        GetFiltersAndFunctionsToAsTwigAttributeRector::class => [
             __DIR__ . '/src/Twig/UxLinkExtension.php',
         ],
     ]);

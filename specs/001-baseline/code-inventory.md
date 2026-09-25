@@ -77,7 +77,7 @@ This file proves that **every production source artifact** under `src/` is refer
 | --- | --- | --- |
 | `Factory/LinkFactory.php` | Link factory/registry | FR-FACT-001 |
 | `Factory/OptionsFactory.php` | Link factory/registry | FR-FACT-001 |
-| `Registry/LinkProviderRegistry.php` | Link factory/registry | FR-FACT-001 |
+| `Registry/LinkProviderRegistry.php` | Link factory/registry | FR-FACT-001, FR-WORKER-001 |
 | `Renderer/DefaultIconResolver.php` | Link renderer | FR-RENDER-001 |
 | `Renderer/HtmlLinkRenderer.php` | Link renderer | FR-RENDER-001 |
 | `Renderer/UrlRenderer.php` | Link renderer | FR-RENDER-001 |
@@ -86,10 +86,10 @@ This file proves that **every production source artifact** under `src/` is refer
 
 | Source file | Spec section | Requirement IDs |
 | --- | --- | --- |
-| `Twig/Component/UxDownloadLink.php` | Twig UX component | FR-TWIG-002 |
-| `Twig/Component/UxLink.php` | Twig UX component | FR-TWIG-002 |
-| `Twig/Component/UxLinks.php` | Twig UX component | FR-TWIG-002 |
-| `Twig/Component/UxShareLinks.php` | Twig UX component | FR-TWIG-002 |
+| `Twig/Component/UxDownloadLink.php` | Twig UX component | FR-TWIG-002, FR-WORKER-001 |
+| `Twig/Component/UxLink.php` | Twig UX component | FR-TWIG-002, FR-WORKER-001 |
+| `Twig/Component/UxLinks.php` | Twig UX component | FR-TWIG-002, FR-WORKER-001 |
+| `Twig/Component/UxShareLinks.php` | Twig UX component | FR-TWIG-002, FR-WORKER-001 |
 | `Twig/UxLinkExtension.php` | Twig extension | FR-TWIG-001 |
 
 ## Support utilities
@@ -112,7 +112,7 @@ This file proves that **every production source artifact** under `src/` is refer
 
 | Source file | Spec section | Requirement IDs |
 | --- | --- | --- |
-| `Resources/config/services.php` | Service wiring | FR-DI-001 |
+| `Resources/config/services.php` | Service wiring | FR-DI-001, FR-WORKER-001 |
 
 ## Translations
 

@@ -128,9 +128,7 @@ final class CoverageGapTest extends TestCase
     {
         $first = new WhatsappContactProvider();
         $second = new WhatsappContactProvider();
-        $registry = new LinkProviderRegistry([], new BundleConfiguration([], [], [], []));
-        $registry->add($first, 5);
-        $registry->add($second, 0);
+        $registry = new LinkProviderRegistry([$first, $second], new BundleConfiguration([], [], [], []));
 
         self::assertSame($first, $registry->get(LinkFamily::Contact, 'whatsapp'));
     }

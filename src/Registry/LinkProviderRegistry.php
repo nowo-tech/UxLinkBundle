@@ -11,6 +11,10 @@ use Nowo\UxLinkBundle\Exception\ProviderNotFoundException;
 
 /**
  * Registry of link providers indexed by family and name.
+ *
+ * Providers are registered only at construction (from tagged services). The map is
+ * immutable afterward so FrankenPHP worker mode with kernel reset disabled cannot
+ * leak providers across requests via runtime mutation.
  */
 final class LinkProviderRegistry
 {
@@ -30,25 +34,8 @@ final class LinkProviderRegistry
             $family = $provider->getFamily()->value;
             $name = $provider->getName();
             $priority = (int) ($this->configuration->providerConfig($family, $name)['priority'] ?? 0);
-            $this->add($provider, $priority);
+            $this->register($provider, $priority);
         }
-    }
-
-    public function add(LinkProviderInterface $provider, int $priority = 0): void
-    {
-        $family = $provider->getFamily()->value;
-        $name = $provider->getName();
-
-        if (!isset($this->providers[$family])) {
-            $this->providers[$family] = [];
-        }
-
-        $existing = $this->providers[$family][$name] ?? null;
-        if (null !== $existing && $priority <= 0) {
-            return;
-        }
-
-        $this->providers[$family][$name] = $provider;
     }
 
     public function get(LinkFamily $family, string $provider): LinkProviderInterface
@@ -72,5 +59,22 @@ final class LinkProviderRegistry
     public function all(LinkFamily $family): array
     {
         return array_values($this->providers[$family->value] ?? []);
+    }
+
+    private function register(LinkProviderInterface $provider, int $priority = 0): void
+    {
+        $family = $provider->getFamily()->value;
+        $name = $provider->getName();
+
+        if (!isset($this->providers[$family])) {
+            $this->providers[$family] = [];
+        }
+
+        $existing = $this->providers[$family][$name] ?? null;
+        if (null !== $existing && $priority <= 0) {
+            return;
+        }
+
+        $this->providers[$family][$name] = $provider;
     }
 }

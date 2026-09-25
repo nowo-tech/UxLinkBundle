@@ -21,7 +21,7 @@ The image default `Caddyfile` enables FrankenPHP worker mode:
 php_server { worker /app/public/index.php 2 }
 ```
 
-FrankenPHP worker mode: Supported (tested with worker enabled in the default Caddyfile). Keep `FRANKENPHP_MODE=worker` (the Compose default).
+FrankenPHP worker mode: Supported under **scenario B** (kernel not reset between requests). See [FRANKENPHP-WORKER-AUDIT.md](FRANKENPHP-WORKER-AUDIT.md). Keep `FRANKENPHP_MODE=worker` (the Compose default).
 
 ## Switching classic vs worker (`FRANKENPHP_MODE`)
 
