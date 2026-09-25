@@ -9,6 +9,7 @@
 # Caches / analysis
 /.php-cs-fixer.cache
 /.phpunit.cache/
+.phpunit.result.cache
 
 # Package manager locks (optional local)
 composer.lock
