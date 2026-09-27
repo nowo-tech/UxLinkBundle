@@ -34,6 +34,7 @@ final class UxDownloadLink
         ?string $previewUrl = null,
         ?string $description = null,
     ): void {
+        // @igor-ignore - Not shared worker service state.
         $this->link = $this->linkFactory->create('download', 'download', array_filter([
             'url' => $url,
             'filename' => $filename,

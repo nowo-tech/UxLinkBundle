@@ -39,6 +39,7 @@ final class UxShareLinks
             'text' => $text,
         ]);
 
+        // @igor-ignore - Not shared worker service state.
         $this->links = $this->linkFactory->createMany('share', $providers, $options);
     }
 }

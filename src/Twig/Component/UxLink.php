@@ -51,8 +51,10 @@ final class UxLink
             $options['label'] = $label;
         }
 
+        // @igor-ignore - Not shared worker service state.
         $this->link = $this->linkFactory->create($family, $provider, $options);
         if (null !== $class) {
+            // @igor-ignore - Not shared worker service state.
             $this->link = $this->link->withAttributes(new LinkAttributes(class: $class));
         }
     }

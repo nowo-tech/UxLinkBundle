@@ -8,6 +8,7 @@
 ```bash
 make test
 make phpstan
+make igor
 make cs-check
 ```
 

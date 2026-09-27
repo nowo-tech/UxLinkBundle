@@ -30,6 +30,7 @@ final class UxLinks
      */
     public function mount(string $family, array $providers, array $options = []): void
     {
+        // @igor-ignore - Not shared worker service state.
         $this->links = $this->linkFactory->createMany($family, $providers, $options);
     }
 }

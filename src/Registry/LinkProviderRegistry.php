@@ -67,6 +67,7 @@ final class LinkProviderRegistry
         $name = $provider->getName();
 
         if (!isset($this->providers[$family])) {
+            // @igor-ignore - Not shared worker service state.
             $this->providers[$family] = [];
         }
 
@@ -75,6 +76,7 @@ final class LinkProviderRegistry
             return;
         }
 
+        // @igor-ignore - Not shared worker service state.
         $this->providers[$family][$name] = $provider;
     }
 }
