@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.6] - 2026-10-09
+
+### Dependencies
+
+- Dev: `igor-php/igor-php` constraint `^0.10.0` (Dependabot #8).
+- Test fixture `config/reference.php` regenerated for Symfony 8.1.8.
+
+[1.1.6]: https://github.com/nowo-tech/UxLinkBundle/releases/tag/v1.1.6
+
 ## [1.1.5] - 2026-09-27
 
 ### Added

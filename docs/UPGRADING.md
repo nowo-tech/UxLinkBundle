@@ -3,6 +3,16 @@
 
 ## Unreleased
 
+## To 1.1.6
+
+From **1.1.5** — dev tooling update.
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
+
+No breaking changes. No application upgrade steps.
+
 ## To 1.1.5
 
 From **1.1.4** — REQ-CS-008 Igor FrankenPHP worker audit (igor-php require-dev, igor.json, make igor).
@@ -16,6 +26,7 @@ php bin/console cache:clear
 
 ## Table of contents
 
+- [To 1.1.6](#to-116)
 - [1.1.3 → 1.1.4](#113--114)
 - [1.1.2 → 1.1.3](#112--113)
 - [To 1.1.2](#to-112)
