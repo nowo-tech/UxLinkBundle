@@ -1,5 +1,25 @@
 # Upgrading
 
+## Table of contents
+
+- [Unreleased](#unreleased)
+- [To 1.2.0](#to-120)
+- [To 1.1.6](#to-116)
+- [To 1.1.5](#to-115)
+- [1.1.3 → 1.1.4](#113--114)
+- [1.1.2 → 1.1.3](#112--113)
+- [To 1.1.2](#to-112)
+- [To 1.1.1](#to-111)
+- [To 1.1.0](#to-110)
+  - [Twig Extra Bundle (REQ-TWIG-004)](#twig-extra-bundle-req-twig-004)
+  - [Twig-CS-Fixer (maintainers)](#twig-cs-fixer-maintainers)
+- [1.0.x patch notes](#10x-patch-notes)
+  - [1.0.6 → 1.0.7](#106--107)
+  - [1.0.5 → 1.0.6](#105--106)
+  - [1.0.4 → 1.0.5](#104--105)
+  - [1.0.0 → 1.0.4](#100--104)
+  - [1.0.0](#100)
+
 ## Unreleased
 
 ## To 1.2.0
@@ -34,17 +54,6 @@ php bin/console cache:clear
 ```
 
 - No application upgrade steps for require-dev Igor tooling (REQ-CS-008). Consumers do not pull `igor-php/igor-php` transitively.
-
-## Table of contents
-
-- [To 1.2.0](#to-120)
-- [To 1.1.6](#to-116)
-- [1.1.3 → 1.1.4](#113--114)
-- [1.1.2 → 1.1.3](#112--113)
-- [To 1.1.2](#to-112)
-- [To 1.1.1](#to-111)
-- [To 1.1.0](#to-110)
-- [1.0.x patch notes](#10x-patch-notes)
 
 ## 1.1.3 → 1.1.4
 
