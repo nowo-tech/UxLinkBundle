@@ -14,7 +14,7 @@ This bundle is **FrankenPHP worker mode friendly** (including `reset_kernel: fal
 
 | Version | PHP | Symfony | Status |
 |---------|-----|---------|--------|
-| 1.1.x | >= 8.2 | 7.0 – 8.1+ | Supported |
+| 1.1.x | >= 8.2 | 7.4 – 8.1+ (7.0–7.3 until 1.1.6) | Supported |
 | 1.0.x | >= 8.2 | 7.0 – 8.1+ | Supported |
 
 Install a specific release:

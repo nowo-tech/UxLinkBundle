@@ -28,7 +28,7 @@ Safe, extensible link generation for Symfony — inspired by Symfony UX Calendar
 | ADR | Decision |
 |-----|----------|
 | ADR-007 | Light internal `PhoneNormalizer` (no libphonenumber) |
-| ADR-008 | PHP `>=8.2`, Symfony `^7.0 \|\| ^8.0` |
+| ADR-008 | PHP `>=8.2`, Symfony `^7.4 \|\| ^8.0` |
 | ADR-003 | Single `LinkProviderInterface` + family DTOs |
 | ADR-006 | No domain events in v1.0 |
 

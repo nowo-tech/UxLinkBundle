@@ -3,6 +3,10 @@
 
 ## Unreleased
 
+- Requires Symfony 7.4+ (or 8.x). Stay on 1.1.6 for Symfony 7.0–7.3.
+- `templates.links` / `templates.share_links` / `templates.download_link` now take effect. If you set them to templates that were never rendered, check those templates (variables: `links` / `link` and `this`).
+- Relative URLs such as `/\evil.com` or containing tabs/newlines are now rejected by `UrlPolicy` (`InvalidUrlException`).
+
 ## To 1.1.6
 
 From **1.1.5** — dev tooling update.

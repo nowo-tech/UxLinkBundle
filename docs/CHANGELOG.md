@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `templates.links`, `templates.share_links` and `templates.download_link` are now applied to the `UxLinks`, `UxShareLinks` and `UxDownloadLink` Twig components (a compiler pass replaces the template declared in `#[AsTwigComponent]`); they were previously stored as parameters only.
+- `docs/CONFIGURATION.md` now documents the whole tree: `defaults.external_target_policy`, `families`, `providers.*` (`enabled`, `icon`, `label`, `priority`), `aliases` and `templates`.
+
+### Security
+
+- `UrlPolicy`: user-supplied relative URLs starting with `/\` (normalised by browsers to `//host`) or containing control characters (e.g. `/<TAB>/host`) are rejected (open redirect / off-site link).
+
+### Changed
+
+- Minimum Symfony version raised from 7.0 to 7.4 (`^7.4 || ^8.0`); the CI matrix no longer tests 7.0.
+
 ## [1.1.6] - 2026-10-09
 
 ### Dependencies
