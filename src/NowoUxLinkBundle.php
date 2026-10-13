@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Nowo\UxLinkBundle;
 
+use Nowo\UxLinkBundle\DependencyInjection\Compiler\ComponentTemplatesPass;
 use Nowo\UxLinkBundle\DependencyInjection\Compiler\TwigPathsPass;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -17,5 +19,7 @@ final class NowoUxLinkBundle extends Bundle
     {
         parent::build($container);
         $container->addCompilerPass(new TwigPathsPass());
+        // After autoconfiguration (priority 100), before UX TwigComponent's pass (priority 0).
+        $container->addCompilerPass(new ComponentTemplatesPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 10);
     }
 }
