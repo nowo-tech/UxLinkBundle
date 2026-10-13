@@ -28,6 +28,8 @@ final class UrlPolicyTest extends TestCase
     {
         yield 'https' => ['https://example.com/path?q=1'];
         yield 'relative' => ['/assets/file.pdf'];
+        yield 'root' => ['/'];
+        yield 'relative with query' => ['/search?q=a\\b'];
         yield 'mailto' => ['mailto:user@example.com'];
     }
 
@@ -46,5 +48,12 @@ final class UrlPolicyTest extends TestCase
     {
         yield 'javascript' => ['javascript:alert(1)'];
         yield 'data' => ['data:text/html,<script>alert(1)</script>'];
+        yield 'protocol-relative' => ['//evil.com'];
+        yield 'backslash protocol-relative' => ['/\\evil.com'];
+        yield 'backslash path' => ['/\\/evil.com'];
+        yield 'tab-separated slashes' => ["/\t/evil.com"];
+        yield 'newline-separated slashes' => ["/\n/evil.com"];
+        yield 'null byte' => ["/files\0.pdf"];
+        yield 'bare relative' => ['evil.com/path'];
     }
 }

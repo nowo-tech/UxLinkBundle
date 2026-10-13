@@ -66,8 +66,23 @@ final class UrlPolicy
         return strtolower($matches[1]);
     }
 
+    /**
+     * Same-origin absolute path only. Rejects protocol-relative `//host`, backslash variants
+     * (`/\host`, which browsers normalise to `//host`) and control characters (browsers strip
+     * tabs/newlines, so `/<TAB>/host` would also become `//host`).
+     */
     private static function isRelativePath(string $url): bool
     {
-        return str_starts_with($url, '/') && !str_starts_with($url, '//');
+        if (!str_starts_with($url, '/')) {
+            return false;
+        }
+
+        if (1 === preg_match('/[\x00-\x1F\x7F]/', $url)) {
+            return false;
+        }
+
+        $second = $url[1] ?? '';
+
+        return '/' !== $second && '\\' !== $second;
     }
 }
