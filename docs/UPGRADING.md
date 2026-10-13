@@ -1,7 +1,14 @@
 # Upgrading
 
-
 ## Unreleased
+
+## To 1.2.0
+
+From **1.1.6** — security - stricter relative URLs; component templates configurable; Symfony >=7.4.
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
 
 - Requires Symfony 7.4+ (or 8.x). Stay on 1.1.6 for Symfony 7.0–7.3.
 - `templates.links` / `templates.share_links` / `templates.download_link` now take effect. If you set them to templates that were never rendered, check those templates (variables: `links` / `link` and `this`).
@@ -30,6 +37,7 @@ php bin/console cache:clear
 
 ## Table of contents
 
+- [To 1.2.0](#to-120)
 - [To 1.1.6](#to-116)
 - [1.1.3 → 1.1.4](#113--114)
 - [1.1.2 → 1.1.3](#112--113)

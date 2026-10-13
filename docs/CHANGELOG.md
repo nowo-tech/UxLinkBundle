@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-13
+
 ### Fixed
 
 - `templates.links`, `templates.share_links` and `templates.download_link` are now applied to the `UxLinks`, `UxShareLinks` and `UxDownloadLink` Twig components (a compiler pass replaces the template declared in `#[AsTwigComponent]`); they were previously stored as parameters only.
@@ -19,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Minimum Symfony version raised from 7.0 to 7.4 (`^7.4 || ^8.0`); the CI matrix no longer tests 7.0.
+
+[1.2.0]: https://github.com/nowo-tech/UxLinkBundle/releases/tag/v1.2.0
 
 ## [1.1.6] - 2026-10-09
 
