@@ -10,6 +10,30 @@ There is no separate executable spec language (for example Gherkin); Spec Kit sp
 
 ---
 
+## Table of contents
+
+- [User stories](#user-stories)
+- [Product vision](#product-vision)
+- [v1.0 scope](#v10-scope)
+- [Key ADRs (approved)](#key-adrs-approved)
+- [Traceability](#traceability)
+- [Explicit non-goals](#explicit-non-goals)
+- [Validating the functional spec](#validating-the-functional-spec)
+- [Requirement identifiers (`REQ-*`)](#requirement-identifiers-req-)
+- [Suggested workflow for contributors](#suggested-workflow-for-contributors)
+- [GitHub Spec Kit (summary)](#github-spec-kit-summary)
+- [Relationship to Engram](#relationship-to-engram)
+- [See also](#see-also)
+
+## User stories
+
+| ID | Story | Integrator docs |
+| --- | --- | --- |
+| US-01 | As an integrator, I resolve contact / share / map / download links by provider id and options, then render HTML or URLs in Twig. | [USAGE — PHP](USAGE.md#php), [USAGE — Twig functions](USAGE.md#twig-functions) |
+| US-02 | As an integrator, I register my own providers with `#[AsLinkProvider]` without forking the bundle. | [USAGE — Custom providers](USAGE.md#custom-providers) |
+| US-03 | As a security-conscious integrator, I rely on `UrlPolicy` and `HtmlAttributePolicy` to block dangerous schemes and attributes. | [SECURITY.md](SECURITY.md) |
+| US-04 | As a frontend developer, I embed `<twig:ux-link>`, link lists, share grids and download components. | [USAGE — Twig Components](USAGE.md#twig-components) |
+
 ## Product vision
 
 Safe, extensible link generation for Symfony — inspired by Symfony UX CalendarLink, published as `nowo-tech/ux-link-bundle`.
@@ -35,6 +59,31 @@ Safe, extensible link generation for Symfony — inspired by Symfony UX Calendar
 ## Traceability
 
 Integration tests in `tests/Integration/AllProvidersIntegrationTest.php` cover each bundled provider.
+
+## Explicit non-goals
+
+- Full international phone number validation (light internal `PhoneNormalizer` only, ADR-007).
+- Domain events around link generation (ADR-006).
+- Tracking, analytics or URL shortening of generated links.
+- The demo under `demo/` is illustrative, not part of the Packagist API.
+
+## Validating the functional spec
+
+- **`make qa`** (Docker) or **`composer qa`**: coding standard, PHPStan (FrankenPHP classic + worker rulesets), PHPUnit.
+- **`make release-check`**: full pre-release gate (includes `check-no-cursor-coauthor`).
+- `tests/Integration/AllProvidersIntegrationTest.php` covers each bundled provider; behavior changes require tests under `tests/` and an update of [`specs/001-baseline/spec.md`](../specs/001-baseline/spec.md).
+
+## Requirement identifiers (`REQ-*`)
+
+| ID | Location | Meaning |
+| --- | --- | --- |
+| REQ-GIT-001 | `make check-no-cursor-coauthor`, `.githooks/commit-msg`, CI `git-hygiene` | No AI co-author trailers in history |
+| REQ-CS-008 | Root `Makefile` (`igor`) | Igor worker-state audit |
+| REQ-MAKE-008 | `demo/Makefile`, `demo/symfony8/Makefile` (`update-deps*`) | Update Composer dependencies in demos |
+| REQ-MAKE-009 | `demo/Makefile`, `demo/symfony8/Makefile` | Optional monorepo helper absent on standalone checkouts |
+| REQ-MAKE-010 | Root `Makefile` | Prefer Compose V2, fall back to V1 |
+
+When scripted behavior changes, update the comment next to the existing `REQ-*` or add a new ID and cite it from PRs/issues.
 
 ## Suggested workflow for contributors
 
@@ -71,5 +120,11 @@ specify integration list   # Cursor → installed (default)
 
 In Cursor Agent, start a new feature with `/speckit-specify <description>`. For day-to-day tooling details, skills reference, folder layout, and troubleshooting, read **[`SPEC-KIT.md`](SPEC-KIT.md)**.
 
----
+## Relationship to Engram
 
+[ENGRAM.md](ENGRAM.md) documents the org-wide checklist plane (Engram MCP memory, documentation hygiene). It does **not** replace this document: the functional contract (user stories, scope, validation, `REQ-*` anchors) lives here and in `specs/001-baseline/`.
+
+## See also
+
+- [SPEC-KIT.md](SPEC-KIT.md) · [`specs/001-baseline/spec.md`](../specs/001-baseline/spec.md)
+- [USAGE.md](USAGE.md) · [CONFIGURATION.md](CONFIGURATION.md) · [CONTRIBUTING.md](CONTRIBUTING.md) · [RELEASE.md](RELEASE.md)

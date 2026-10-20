@@ -10,20 +10,6 @@ Generate safe, extensible contact, share, map, and download links for Symfony ap
 
 This bundle is **FrankenPHP worker mode friendly** (including `reset_kernel: false`). See the [worker audit](docs/FRANKENPHP-WORKER-AUDIT.md).
 
-## Version information
-
-| Version | PHP | Symfony | Status |
-|---------|-----|---------|--------|
-| 1.2.x | >= 8.2 | 7.4 – 8.1+ | Supported |
-| 1.1.x | >= 8.2 | 7.0 – 8.1+ | Supported |
-| 1.0.x | >= 8.2 | 7.0 – 8.1+ | Supported |
-
-Install a specific release:
-
-```bash
-composer require nowo-tech/ux-link-bundle:^1.1
-```
-
 ## Installation
 
 ```bash
@@ -61,6 +47,20 @@ echo $link->getUrl();
 <twig:UxLink family="contact" provider="whatsapp" recipient="+34600111222" message="Hello" />
 ```
 
+## Version information
+
+| Version | PHP | Symfony | Status |
+|---------|-----|---------|--------|
+| 1.2.x | >= 8.2 | 7.4 – 8.1+ | Supported |
+| 1.1.x | >= 8.2 | 7.0 – 8.1+ | Supported |
+| 1.0.x | >= 8.2 | 7.0 – 8.1+ | Supported |
+
+Install a specific release:
+
+```bash
+composer require nowo-tech/ux-link-bundle:^1.1
+```
+
 ## Demos
 
 ```bash
@@ -69,10 +69,8 @@ make -C demo up-symfony8   # http://localhost:8048
 
 ## Documentation
 
-- [GitHub Actions CI requirements](docs/GITHUB_CI.md)
 - [Installation](docs/INSTALLATION.md)
 - [Configuration](docs/CONFIGURATION.md)
-- [PSR evaluation (REQ-CS-007)](docs/PSR.md)
 - [Usage](docs/USAGE.md)
 - [Contributing](docs/CONTRIBUTING.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
@@ -80,13 +78,15 @@ make -C demo up-symfony8   # http://localhost:8048
 - [Upgrading](docs/UPGRADING.md)
 - [Release](docs/RELEASE.md)
 - [Security](docs/SECURITY.md)
-- [FrankenPHP worker audit](docs/FRANKENPHP-WORKER-AUDIT.md)
 - [Engram](docs/ENGRAM.md)
 - [Spec-driven development](docs/SPEC-DRIVEN-DEVELOPMENT.md)
 - [GitHub Spec Kit](docs/SPEC-KIT.md)
 
 ### Additional documentation
 
+- [GitHub Actions CI requirements](docs/GITHUB_CI.md)
+- [PSR evaluation (REQ-CS-007)](docs/PSR.md)
+- [FrankenPHP worker audit](docs/FRANKENPHP-WORKER-AUDIT.md)
 - [Demo with FrankenPHP](docs/DEMO-FRANKENPHP.md) (includes worker mode)
 
 ## Tests and coverage

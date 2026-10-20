@@ -2,7 +2,7 @@
 
 **Baseline spec**: [`spec.md`](spec.md)  
 **Package**: `nowo-tech/ux-link-bundle`  
-**Last audited**: 2026-07-07
+**Last audited**: 2026-10-20
 
 This file proves that **every production source artifact** under `src/` is referenced by the baseline specification. Test-only files under `tests/` and `*.test.ts` under `src/` are out of Packagist scope. Built assets under `Resources/public/` are documented as Vite/build outputs.
 
@@ -12,6 +12,7 @@ This file proves that **every production source artifact** under `src/` is refer
 | --- | --- | --- |
 | `Config/BundleConfiguration.php` | Runtime configuration | FR-CFG-003 |
 | `DependencyInjection/Compiler/TwigPathsPass.php` | Compiler pass | FR-DI-002 |
+| `DependencyInjection/Compiler/ComponentTemplatesPass.php` | Compiler pass: `templates.*` override the Twig component templates | FR-DI-002, FR-VIEW-008 |
 | `DependencyInjection/Configuration.php` | Config tree | FR-CFG-001 |
 | `DependencyInjection/NowoUxLinkExtension.php` | DI extension | FR-CFG-002 |
 | `NowoUxLinkBundle.php` | Bundle entry | FR-BUNDLE-001 |
@@ -140,7 +141,7 @@ This file proves that **every production source artifact** under `src/` is refer
 
 | Category | Files | Mapped |
 | --- | ---: | ---: |
-| Bundle & DI | 5 | 5 |
+| Bundle & DI | 6 | 6 |
 | Domain models | 13 | 13 |
 | Security | 2 | 2 |
 | Link providers | 15 | 15 |
@@ -152,6 +153,6 @@ This file proves that **every production source artifact** under `src/` is refer
 | Symfony config | 1 | 1 |
 | Translations | 7 | 7 |
 | Twig views | 5 | 5 |
-| **Total production sources** | **70** | **70** |
+| **Total production sources** | **71** | **71** |
 
-Audit: `find src -type f ! -path '*/assets/dist/*' ! -name '*.test.ts' | wc -l`
+Audit: `git ls-files src | wc -l` → **71**

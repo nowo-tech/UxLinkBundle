@@ -4,6 +4,13 @@
 
 Both demos use FrankenPHP (Caddy + PHP) on port 80 inside the container.
 
+## Table of contents
+
+- [Development](#development)
+- [Production-like](#production-like)
+- [Switching classic vs worker (`FRANKENPHP_MODE`)](#switching-classic-vs-worker-frankenphp_mode)
+- [Troubleshooting](#troubleshooting)
+
 ## Development
 
 ```bash

@@ -30,6 +30,17 @@ nowo_ux_link:
         download_link: '@NowoUxLinkBundle/components/ux-download-link.html.twig'
 ```
 
+## Table of contents
+
+- [defaults](#defaults)
+- [families](#families)
+- [providers](#providers)
+- [aliases](#aliases)
+- [templates](#templates)
+- [Translations](#translations)
+  - [Supported locales](#supported-locales)
+  - [Overriding translations (REQ-I18N-001)](#overriding-translations-req-i18n-001)
+
 ## defaults
 
 | Key | Default | Description |

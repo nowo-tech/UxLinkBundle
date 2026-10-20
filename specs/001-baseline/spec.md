@@ -79,7 +79,7 @@ As a frontend developer, I embed `<twig:ux-link>`, share grids, and download com
 
 ## Success Criteria
 
-- **SC-001**: 100% of production files in `src/` appear in [`code-inventory.md`](code-inventory.md) with requirement IDs (70/70 mapped).
+- **SC-001**: 100% of production files in `src/` appear in [`code-inventory.md`](code-inventory.md) with requirement IDs (71/71 mapped, `git ls-files src`).
 - **SC-002**: Configuration keys in `docs/CONFIGURATION.md` match `Configuration.php`.
 - **SC-003**: `composer qa` / `make release-check` pass in CI (PHPUnit, PHPStan, Vitest where applicable).
 - **SC-004**: No Packagist-visible behavior change without spec, inventory, and test updates.

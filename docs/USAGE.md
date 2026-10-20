@@ -6,6 +6,7 @@
 - [Twig functions](#twig-functions)
 - [Twig Components](#twig-components)
 - [Custom providers](#custom-providers)
+- [FrankenPHP worker mode](#frankenphp-worker-mode)
 - [Overriding templates (REQ-TWIG-001)](#overriding-templates-req-twig-001)
 
 ## PHP
