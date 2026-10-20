@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 return (new PhpCsFixer\Config())
-    ->setParallelConfig(PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
+    ->setParallelConfig(new PhpCsFixer\Runner\Parallel\ParallelConfig(2))
     ->setRiskyAllowed(true)
     ->setRules([
         '@PSR12' => true,
