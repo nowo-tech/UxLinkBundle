@@ -117,8 +117,8 @@ update-deps: ensure-up
 	@$(MAKE) -C demo/symfony8 update-deps 2>/dev/null || $(MAKE) -C demo/symfony8 update-bundle
 
 composer-sync: ensure-up
-	$(COMPOSE) exec -T $(SERVICE_PHP) composer validate --strict
-	$(COMPOSE) exec -T $(SERVICE_PHP) composer install --no-interaction --prefer-dist
+	$(COMPOSE) exec -T $(SERVICE_PHP) composer validate --strict --no-check-lock
+	$(COMPOSE) exec -T $(SERVICE_PHP) composer update --no-interaction
 
 clean: ensure-up
 	$(COMPOSE) exec -T $(SERVICE_PHP) sh -c "rm -rf vendor .phpunit.cache coverage coverage.xml .php-cs-fixer.cache"
