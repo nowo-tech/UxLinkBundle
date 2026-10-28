@@ -3,6 +3,7 @@
 ## Table of contents
 
 - [Unreleased](#unreleased)
+- [To 1.2.1](#to-121)
 - [To 1.2.0](#to-120)
 - [To 1.1.6](#to-116)
 - [To 1.1.5](#to-115)
@@ -21,6 +22,14 @@
   - [1.0.0](#100)
 
 ## Unreleased
+
+## To 1.2.1
+
+From **1.2.0**:
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
 
 - `contact` / `email` links throw `InvalidLinkOptionsException` when the recipient, a `cc` or a `bcc` is not a valid e-mail address (it used to be appended to `mailto:` as is).
 - Component templates render only attributes allowed by `HtmlAttributePolicy` (`class`, `id`, `title`, `target`, `rel`, `download`, `aria-*` listed ones, `role`, `lang`, `hreflang`, `data-*`). Custom templates can use `link.attributes.safeArray()`.

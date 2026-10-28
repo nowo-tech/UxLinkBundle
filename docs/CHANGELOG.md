@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Table of contents
 
 - [[Unreleased]](#unreleased)
+- [[1.2.1] - 2026-10-28](#121---2026-10-28)
 - [[1.2.0] - 2026-10-13](#120---2026-10-13)
 - [[1.1.6] - 2026-10-09](#116---2026-10-09)
 - [[1.1.5] - 2026-09-27](#115---2026-09-27)
@@ -27,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-10-28
+
+UxLink: component templates apply HtmlAttributePolicy; e-mail contact links validate recipient, cc and bcc. See [UPGRADING](UPGRADING.md#to-121).
+
 ### Security
 
 - **Twig components apply `HtmlAttributePolicy`.** `ux-link-component`, `ux-links`, `ux-share-links` and
@@ -42,6 +47,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dependencies refreshed (Composer and pnpm/npm lock files of the bundle and its demos, campaign 2026-10-19).
 - `.php-cs-fixer.dist.php`: `new ParallelConfig(2)` (REQ-CS-001).
 - Documentation: wave-1 REQ compliance — README documentation list order and Version information moved after the get-started sections, canonical bug report template, CONTRIBUTING Cursor Agent settings, TOCs for long docs, spec-driven development user stories / non-goals / validation / REQ table / Engram relationship, Spec Kit inventory refresh (71/71, ComponentTemplatesPass).
+
+[1.2.1]: https://github.com/nowo-tech/UxLinkBundle/releases/tag/v1.2.1
 
 ## [1.2.0] - 2026-10-13
 
