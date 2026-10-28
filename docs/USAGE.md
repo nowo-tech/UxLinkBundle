@@ -46,3 +46,7 @@ Place overrides under `templates/bundles/NowoUxLinkBundle/components/`.
 | `components/ux-links.html.twig` | Link list |
 | `components/ux-share-links.html.twig` | Share navigation |
 | `components/ux-download-link.html.twig` | Download card |
+
+**Override vs upgrade (freeze rule).** An application file at the override path always wins and does not pick up vendor changes for that path until you remove or merge it: a full-file override freezes that `<subpath>` on every `composer update` while the rest of the bundle keeps upgrading. Prefer the upgrade-safe options first: `nowo_ux_link.templates.*` pointing at your **own** template names (the component then renders your file and the vendor default stays untouched), link attributes / classes from the factory options, and provider icons / labels in `providers.*`.
+
+**Recovering upstream after a freeze:** delete (or rename aside) the application override, clear the cache (`php bin/console cache:clear`) and re-apply only the customisation you still need. Diff your copy against the new vendor file under `vendor/nowo-tech/ux-link-bundle/src/Resources/views/` before re-copying.
