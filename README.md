@@ -10,6 +10,8 @@ Generate safe, extensible contact, share, map, and download links for Symfony ap
 
 This bundle is **FrankenPHP worker mode friendly** (including `reset_kernel: false`). See the [worker audit](docs/FRANKENPHP-WORKER-AUDIT.md).
 
+![UX Link demo: WhatsApp contact link, share links, OpenStreetMap link and an enriched download link with size and MIME type](docs/images/demo/link-components.webp)
+
 ## Installation
 
 ```bash
@@ -66,6 +68,8 @@ composer require nowo-tech/ux-link-bundle:^1.1
 ```bash
 make -C demo up-symfony8   # http://localhost:8048
 ```
+
+The screenshot at the top of this README comes from this demo; refresh it with `make -C demo/symfony8 demo-screenshots` (`make -C demo/symfony8 test-e2e` runs the Playwright happy path).
 
 ## Documentation
 
