@@ -6,6 +6,7 @@ namespace Nowo\UxLinkBundle\Tests\Integration;
 
 use Nowo\UxLinkBundle\Enum\LinkFamily;
 use Nowo\UxLinkBundle\Model\Link;
+use Nowo\UxLinkBundle\Model\LinkAttributes;
 use Nowo\UxLinkBundle\Tests\Kernel\TestKernel;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -42,6 +43,26 @@ final class TwigRenderingIntegrationTest extends KernelTestCase
 
         self::assertStringContainsString('mailto:a@b.com', $html);
         self::assertStringNotContainsString('<script>', $html);
+    }
+
+    public function testComponentTemplateAppliesAttributePolicy(): void
+    {
+        self::bootKernel();
+        /** @var Environment $twig */
+        $twig = self::getContainer()->get('twig');
+
+        $html = $twig->render('@NowoUxLinkBundle/components/ux-link-component.html.twig', [
+            'link' => new Link(
+                LinkFamily::Contact,
+                'email',
+                'mailto:a@b.com',
+                label: 'Mail',
+                attributes: new LinkAttributes(class: 'btn', extra: ['onclick' => 'alert(1)']),
+            ),
+        ]);
+
+        self::assertStringContainsString('class="btn"', $html);
+        self::assertStringNotContainsString('onclick', $html);
     }
 
     public function testTwigExtensionFunctionsAreRegistered(): void

@@ -27,6 +27,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- **Twig components apply `HtmlAttributePolicy`.** `ux-link-component`, `ux-links`, `ux-share-links` and
+  `ux-download-link` iterated `LinkAttributes::toArray()` directly, so extra attributes such as `onclick` (from host
+  code) reached the HTML. They render `LinkAttributes::safeArray()` now, the same filter as `HtmlLinkRenderer`.
+- **E-mail contact links validate addresses.** A recipient such as `a@b.c?bcc=x@evil.test` added hidden recipients or
+  a body to the draft. The recipient, `cc` and `bcc` must be valid e-mail addresses (`InvalidLinkOptionsException`
+  otherwise).
+
 ### Changed
 
 - Developer tooling: `make release-check` runs the full REQ-MAKE-002 chain in order (`ensure-up` first, then `check-no-cursor-coauthor`, `check-open-prs`, `check-twig-extra`, new `check-no-raw-html-form` (REQ-TWIG-005), `composer-sync`, `cs-fix`, `cs-check`, `rector-dry`, `phpstan`, `igor`, `validate-translations`, `coverage-check`, demo release-check).

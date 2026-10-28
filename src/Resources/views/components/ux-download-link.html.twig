@@ -2,7 +2,7 @@
     <a href="{{ link.url }}"
        class="ux-download-link__anchor"
        {% if link.attributes.download %}download="{{ link.attributes.download }}"{% endif %}
-       {% for name, value in link.attributes.toArray() %}
+       {% for name, value in link.attributes.safeArray() %}
            {% if name != 'download' %} {{ name }}="{{ value }}"{% endif %}
        {% endfor %}
     >

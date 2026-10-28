@@ -6,6 +6,7 @@ namespace Nowo\UxLinkBundle\Provider\Contact;
 
 use Nowo\UxLinkBundle\Attribute\AsLinkProvider;
 use Nowo\UxLinkBundle\Enum\LinkFamily;
+use Nowo\UxLinkBundle\Exception\InvalidLinkOptionsException;
 use Nowo\UxLinkBundle\Model\Link;
 use Nowo\UxLinkBundle\Model\Options\ContactOptions;
 use Nowo\UxLinkBundle\Model\Options\LinkOptionsInterface;
@@ -29,7 +30,14 @@ final class EmailContactProvider extends AbstractLinkProvider
 
     public function create(LinkOptionsInterface $options): Link
     {
-        /** @var ContactOptions $options */
+        \assert($options instanceof ContactOptions);
+        // A recipient like "a@b.c?bcc=x@evil.test" would add hidden recipients or a body to the draft.
+        foreach ([$options->recipient, ...$options->cc, ...$options->bcc] as $address) {
+            if (false === filter_var($address, \FILTER_VALIDATE_EMAIL)) {
+                throw new InvalidLinkOptionsException(\sprintf('Invalid e-mail address "%s" for the email contact link.', $address));
+            }
+        }
+
         $query = [];
         if (null !== $options->subject && '' !== $options->subject) {
             $query['subject'] = $options->subject;

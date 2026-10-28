@@ -22,6 +22,9 @@
 
 ## Unreleased
 
+- `contact` / `email` links throw `InvalidLinkOptionsException` when the recipient, a `cc` or a `bcc` is not a valid e-mail address (it used to be appended to `mailto:` as is).
+- Component templates render only attributes allowed by `HtmlAttributePolicy` (`class`, `id`, `title`, `target`, `rel`, `download`, `aria-*` listed ones, `role`, `lang`, `hreflang`, `data-*`). Custom templates can use `link.attributes.safeArray()`.
+
 ## To 1.2.0
 
 From **1.1.6** — security - stricter relative URLs; component templates configurable; Symfony >=7.4.

@@ -17,8 +17,8 @@ This bundle **generates URLs and HTML links** locally. It does **not** call exte
 | Input | Risk | Mitigation |
 |-------|------|------------|
 | User-supplied URLs | `javascript:`, `data:` XSS | `UrlPolicy` whitelist |
-| HTML attributes | Event-handler injection | `HtmlAttributePolicy` whitelist |
-| Share/contact text | Header injection in `mailto:` | RFC 3986 query encoding |
+| HTML attributes | Event-handler injection | `HtmlAttributePolicy` whitelist, applied by the renderer and every component template (`LinkAttributes::safeArray()`) |
+| Share/contact text | Header injection in `mailto:` | RFC 3986 query encoding; recipient, `cc` and `bcc` validated with `FILTER_VALIDATE_EMAIL` |
 | Phone numbers | Malformed input | `PhoneNormalizer` + validation |
 
 ## Secrets

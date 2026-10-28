@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Nowo\UxLinkBundle\Model;
 
+use Nowo\UxLinkBundle\Security\HtmlAttributePolicy;
+
 /**
  * Safe HTML attributes for rendered links.
  */
@@ -78,6 +80,21 @@ final readonly class LinkAttributes
         }
         if (null !== $this->download) {
             $attributes['download'] = $this->download;
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * Attributes allowed by {@see HtmlAttributePolicy}, with `javascript:` values blanked: what every template renders.
+     *
+     * @return array<string, string>
+     */
+    public function safeArray(): array
+    {
+        $attributes = HtmlAttributePolicy::filter($this->toArray());
+        foreach ($attributes as $name => $value) {
+            $attributes[$name] = HtmlAttributePolicy::sanitizeValue($value);
         }
 
         return $attributes;

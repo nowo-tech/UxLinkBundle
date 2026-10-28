@@ -4,7 +4,7 @@
             <li class="ux-share-links__item">
                 {% include '@NowoUxLinkBundle/components/ux-link.html.twig' with {
                     link: link,
-                    attributes: link.attributes.toArray(),
+                    attributes: link.attributes.safeArray(),
                     show_icon: true,
                     show_label: true,
                 } only %}

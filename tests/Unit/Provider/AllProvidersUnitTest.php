@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nowo\UxLinkBundle\Tests\Unit\Provider;
 
 use Nowo\UxLinkBundle\Contract\LinkProviderInterface;
+use Nowo\UxLinkBundle\Exception\InvalidLinkOptionsException;
 use Nowo\UxLinkBundle\Model\Options\ContactOptions;
 use Nowo\UxLinkBundle\Model\Options\DownloadOptions;
 use Nowo\UxLinkBundle\Model\Options\LinkOptionsInterface;
@@ -65,5 +66,30 @@ final class AllProvidersUnitTest extends TestCase
         yield 'waze' => [WazeMapProvider::class, MapOptions::fromArray(['latitude' => 1.0, 'longitude' => 2.0]), 'waze.com'];
         yield 'osm' => [OpenStreetMapProvider::class, MapOptions::fromArray(['latitude' => 1.0, 'longitude' => 2.0]), 'openstreetmap.org'];
         yield 'download' => [GenericDownloadProvider::class, new DownloadOptions('/doc.pdf', filename: 'doc.pdf'), '/doc.pdf'];
+    }
+
+    /**
+     * @return iterable<string, array{ContactOptions}>
+     */
+    public static function invalidEmailCases(): iterable
+    {
+        yield 'query in recipient' => [new ContactOptions('a@b.com?bcc=x@evil.test')];
+        yield 'invalid cc' => [new ContactOptions('a@b.com', cc: ['not-an-email'])];
+        yield 'invalid bcc' => [new ContactOptions('a@b.com', bcc: ['x@evil.test&body=hi'])];
+    }
+
+    #[DataProvider('invalidEmailCases')]
+    public function testEmailContactRejectsInvalidAddresses(ContactOptions $options): void
+    {
+        $this->expectException(InvalidLinkOptionsException::class);
+
+        (new EmailContactProvider())->create($options);
+    }
+
+    public function testEmailContactEncodesValidCcAndBcc(): void
+    {
+        $link = (new EmailContactProvider())->create(new ContactOptions('a@b.com', cc: ['c@d.com'], bcc: ['e@f.com']));
+
+        self::assertSame('mailto:a@b.com?cc=c%40d.com&bcc=e%40f.com', $link->url);
     }
 }

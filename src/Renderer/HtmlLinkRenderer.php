@@ -7,7 +7,6 @@ namespace Nowo\UxLinkBundle\Renderer;
 use Nowo\UxLinkBundle\Contract\LinkRendererInterface;
 use Nowo\UxLinkBundle\Model\Link;
 use Nowo\UxLinkBundle\Model\LinkRenderOptions;
-use Nowo\UxLinkBundle\Security\HtmlAttributePolicy;
 use Twig\Environment;
 
 /**
@@ -25,10 +24,7 @@ final class HtmlLinkRenderer implements LinkRendererInterface
     {
         $renderOptions ??= new LinkRenderOptions();
 
-        $attributes = HtmlAttributePolicy::filter($link->attributes->toArray());
-        foreach ($attributes as $name => $value) {
-            $attributes[$name] = HtmlAttributePolicy::sanitizeValue($value);
-        }
+        $attributes = $link->attributes->safeArray();
 
         return $this->twig->render(
             $renderOptions->template ?? $this->defaultTemplate,

@@ -33,4 +33,11 @@ final class LinkAttributesTest extends TestCase
         self::assertSame('file.pdf', $array['download']);
         self::assertSame('1', $array['data-id']);
     }
+
+    public function testSafeArrayDropsDisallowedAttributesAndJavascriptValues(): void
+    {
+        $attributes = new LinkAttributes(class: 'btn', extra: ['onclick' => 'alert(1)', 'data-x' => 'javascript:alert(1)', 'title' => 'T']);
+
+        self::assertSame(['data-x' => '', 'title' => 'T', 'class' => 'btn'], $attributes->safeArray());
+    }
 }
