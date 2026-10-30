@@ -12,6 +12,12 @@ use Nowo\UxLinkBundle\Enum\LinkFamily;
  */
 abstract class AbstractLinkProvider implements LinkProviderInterface
 {
+    /**
+     * Whether the family and provider name match this provider.
+     *
+     * @param LinkFamily $family   Requested family
+     * @param string     $provider Requested provider name
+     */
     public function supports(LinkFamily $family, string $provider): bool
     {
         return $family === $this->getFamily() && $provider === $this->getName();

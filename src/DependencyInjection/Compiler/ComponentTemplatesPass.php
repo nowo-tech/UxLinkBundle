@@ -28,6 +28,9 @@ final class ComponentTemplatesPass implements CompilerPassInterface
         UxDownloadLink::class => 'nowo_ux_link.templates.download_link',
     ];
 
+    /**
+     * Replaces the template of the `twig.component` tag of each component with the configured one.
+     */
     public function process(ContainerBuilder $container): void
     {
         foreach (self::COMPONENT_TEMPLATES as $serviceId => $parameter) {

@@ -19,16 +19,27 @@ use Nowo\UxLinkBundle\Util\UrlBuilder;
 #[AsLinkProvider]
 final class AppleMapsProvider extends AbstractLinkProvider
 {
+    /**
+     * Returns the map family.
+     */
     public function getFamily(): LinkFamily
     {
         return LinkFamily::Map;
     }
 
+    /**
+     * Returns the provider name (`apple_maps`).
+     */
     public function getName(): string
     {
         return 'apple_maps';
     }
 
+    /**
+     * Builds Apple Maps links from the map options.
+     *
+     * @param LinkOptionsInterface $options MapOptions instance
+     */
     public function create(LinkOptionsInterface $options): Link
     {
         /** @var MapOptions $options */

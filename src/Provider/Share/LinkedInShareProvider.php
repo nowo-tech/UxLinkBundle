@@ -18,16 +18,27 @@ use Nowo\UxLinkBundle\Util\UrlBuilder;
 #[AsLinkProvider]
 final class LinkedInShareProvider extends AbstractLinkProvider
 {
+    /**
+     * Returns the share family.
+     */
     public function getFamily(): LinkFamily
     {
         return LinkFamily::Share;
     }
 
+    /**
+     * Returns the provider name (`linkedin`).
+     */
     public function getName(): string
     {
         return 'linkedin';
     }
 
+    /**
+     * Builds LinkedIn share links from the share options.
+     *
+     * @param LinkOptionsInterface $options ShareOptions instance
+     */
     public function create(LinkOptionsInterface $options): Link
     {
         /** @var ShareOptions $options */

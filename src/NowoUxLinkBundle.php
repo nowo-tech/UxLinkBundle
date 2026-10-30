@@ -15,6 +15,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 final class NowoUxLinkBundle extends Bundle
 {
+    /**
+     * Registers the Twig paths and component template compiler passes.
+     *
+     * @param ContainerBuilder $container Container being built
+     */
     public function build(ContainerBuilder $container): void
     {
         parent::build($container);

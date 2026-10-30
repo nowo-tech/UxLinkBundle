@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Docs (REQ-CS-001):** every public class and public method in `src/` now has an English PHPDoc description (132 methods; `@param` / `@return` / `@throws` where they add information beyond the native types). No code or behaviour change.
+
 ## [1.2.1] - 2026-10-28
 
 UxLink: component templates apply HtmlAttributePolicy; e-mail contact links validate recipient, cc and bcc. See [UPGRADING](UPGRADING.md#to-121).

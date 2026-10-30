@@ -19,11 +19,28 @@ final class UxDownloadLink
 {
     public Link $link;
 
+    /**
+     * Creates the component.
+     *
+     * @param LinkFactoryInterface $linkFactory Factory building the download link
+     */
     public function __construct(
         private readonly LinkFactoryInterface $linkFactory,
     ) {
     }
 
+    /**
+     * Builds the download link from the component props (empty props are dropped).
+     *
+     * @param string          $url         File URL
+     * @param string|null     $filename    Suggested file name
+     * @param string|null     $mimeType    MIME type shown to the user
+     * @param int|string|null $size        Size in bytes (int or digit string)
+     * @param string|null     $label       Link label
+     * @param string|null     $checksum    Checksum shown to the user
+     * @param string|null     $previewUrl  Optional preview URL
+     * @param string|null     $description Optional description
+     */
     public function mount(
         string $url,
         ?string $filename = null,
@@ -47,6 +64,9 @@ final class UxDownloadLink
         ]));
     }
 
+    /**
+     * Returns the file size in human-readable units (B, KB, MB, GB), or null when the size is unknown.
+     */
     public function humanSize(): ?string
     {
         $size = $this->link->metadata['size'] ?? null;

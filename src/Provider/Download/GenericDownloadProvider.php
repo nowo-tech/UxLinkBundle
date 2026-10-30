@@ -18,16 +18,27 @@ use Nowo\UxLinkBundle\Provider\AbstractLinkProvider;
 #[AsLinkProvider]
 final class GenericDownloadProvider extends AbstractLinkProvider
 {
+    /**
+     * Returns the download family.
+     */
     public function getFamily(): LinkFamily
     {
         return LinkFamily::Download;
     }
 
+    /**
+     * Returns the provider name (`download`).
+     */
     public function getName(): string
     {
         return 'download';
     }
 
+    /**
+     * Builds enriched download links from the download options.
+     *
+     * @param LinkOptionsInterface $options DownloadOptions instance
+     */
     public function create(LinkOptionsInterface $options): Link
     {
         /** @var DownloadOptions $options */

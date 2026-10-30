@@ -12,6 +12,8 @@ use Nowo\UxLinkBundle\Security\HtmlAttributePolicy;
 final readonly class LinkAttributes
 {
     /**
+     * Creates a set of link HTML attributes.
+     *
      * @param array<string, string> $extra
      */
     public function __construct(
@@ -25,6 +27,8 @@ final readonly class LinkAttributes
     }
 
     /**
+     * Builds attributes from a raw array: known keys fill the typed properties and every string value is kept in `extra`.
+     *
      * @param array<string, mixed> $data
      */
     public static function fromArray(array $data): self
@@ -47,6 +51,11 @@ final readonly class LinkAttributes
         );
     }
 
+    /**
+     * Returns a new set where the non-null values of the other set win and classes are concatenated.
+     *
+     * @param self $other Attributes taking precedence
+     */
     public function merge(self $other): self
     {
         return new self(
@@ -60,6 +69,8 @@ final readonly class LinkAttributes
     }
 
     /**
+     * Returns every attribute as a name => value map (unfiltered; templates use {@see safeArray()}).
+     *
      * @return array<string, string>
      */
     public function toArray(): array

@@ -18,16 +18,27 @@ use Nowo\UxLinkBundle\Util\PhoneNormalizer;
 #[AsLinkProvider]
 final class TelephoneContactProvider extends AbstractLinkProvider
 {
+    /**
+     * Returns the contact family.
+     */
     public function getFamily(): LinkFamily
     {
         return LinkFamily::Contact;
     }
 
+    /**
+     * Returns the provider name (`telephone`).
+     */
     public function getName(): string
     {
         return 'telephone';
     }
 
+    /**
+     * Builds tel: contact links from the contact options.
+     *
+     * @param LinkOptionsInterface $options ContactOptions instance
+     */
     public function create(LinkOptionsInterface $options): Link
     {
         /** @var ContactOptions $options */

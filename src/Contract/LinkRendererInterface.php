@@ -12,5 +12,13 @@ use Nowo\UxLinkBundle\Model\LinkRenderOptions;
  */
 interface LinkRendererInterface
 {
+    /**
+     * Renders the link as HTML.
+     *
+     * @param Link                   $link          Link to render
+     * @param LinkRenderOptions|null $renderOptions Icon/label visibility and template override (defaults when null)
+     *
+     * @return string Rendered HTML
+     */
     public function render(Link $link, ?LinkRenderOptions $renderOptions = null): string;
 }

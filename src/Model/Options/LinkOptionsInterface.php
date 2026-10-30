@@ -10,6 +10,8 @@ namespace Nowo\UxLinkBundle\Model\Options;
 interface LinkOptionsInterface
 {
     /**
+     * Builds the typed options from a raw array, validating required keys.
+     *
      * @param array<string, mixed> $data
      */
     public static function fromArray(array $data): static;

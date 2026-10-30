@@ -15,6 +15,8 @@ enum LinkFamily: string
     case Download = 'download';
 
     /**
+     * Returns the translation key prefix of the family (its value).
+     *
      * @return non-empty-string
      */
     public function translationPrefix(): string

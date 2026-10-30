@@ -18,16 +18,27 @@ use Nowo\UxLinkBundle\Util\UrlBuilder;
 #[AsLinkProvider]
 final class WhatsappShareProvider extends AbstractLinkProvider
 {
+    /**
+     * Returns the share family.
+     */
     public function getFamily(): LinkFamily
     {
         return LinkFamily::Share;
     }
 
+    /**
+     * Returns the provider name (`whatsapp`).
+     */
     public function getName(): string
     {
         return 'whatsapp';
     }
 
+    /**
+     * Builds WhatsApp share links from the share options.
+     *
+     * @param LinkOptionsInterface $options ShareOptions instance
+     */
     public function create(LinkOptionsInterface $options): Link
     {
         /** @var ShareOptions $options */

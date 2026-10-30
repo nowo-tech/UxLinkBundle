@@ -19,12 +19,22 @@ final class UxShareLinks
 {
     public LinkCollection $links;
 
+    /**
+     * Creates the component.
+     *
+     * @param LinkFactoryInterface $linkFactory Factory building the share links
+     */
     public function __construct(
         private readonly LinkFactoryInterface $linkFactory,
     ) {
     }
 
     /**
+     * Builds the share links for the URL (empty title/text are dropped).
+     *
+     * @param string       $url       URL to share
+     * @param string|null  $title     Title
+     * @param string|null  $text      Text
      * @param list<string> $providers
      */
     public function mount(
