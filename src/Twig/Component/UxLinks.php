@@ -19,12 +19,20 @@ final class UxLinks
 {
     public LinkCollection $links;
 
+    /**
+     * Creates the component.
+     *
+     * @param LinkFactoryInterface $linkFactory Factory building the links
+     */
     public function __construct(
         private readonly LinkFactoryInterface $linkFactory,
     ) {
     }
 
     /**
+     * Builds one link per provider of the family.
+     *
+     * @param string               $family    Family value
      * @param list<string>         $providers
      * @param array<string, mixed> $options
      */

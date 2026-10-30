@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nowo\UxLinkBundle\Model\Options;
 
 use Nowo\UxLinkBundle\Exception\InvalidLinkOptionsException;
+use Nowo\UxLinkBundle\Exception\InvalidUrlException;
 use Nowo\UxLinkBundle\Security\UrlPolicy;
 
 /**
@@ -13,7 +14,18 @@ use Nowo\UxLinkBundle\Security\UrlPolicy;
 final readonly class ShareOptions implements LinkOptionsInterface
 {
     /**
+     * Creates share options; the shared URL must pass {@see UrlPolicy}.
+     *
+     * @param string       $url         URL to share
+     * @param string|null  $title       Title
+     * @param string|null  $text        Text
+     * @param string|null  $description Description
      * @param list<string> $hashtags
+     * @param string|null  $via         Account credited by the network (e.g. X `via`)
+     * @param string|null  $media       Media URL
+     * @param string|null  $label       Link label
+     *
+     * @throws InvalidUrlException When the URL uses a forbidden scheme
      */
     public function __construct(
         public string $url,
@@ -28,6 +40,11 @@ final readonly class ShareOptions implements LinkOptionsInterface
         UrlPolicy::assertAllowedUserUrl($url);
     }
 
+    /**
+     * Builds share options from a raw array (hashtags lose their leading `#`).
+     *
+     * @throws InvalidLinkOptionsException When no non-empty `url` is given
+     */
     public static function fromArray(array $data): static
     {
         $url = $data['url'] ?? null;

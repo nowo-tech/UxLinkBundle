@@ -18,6 +18,9 @@ use Nowo\UxLinkBundle\Model\Options\ShareOptions;
 final class OptionsFactory
 {
     /**
+     * Builds the typed options DTO of the family from a raw array.
+     *
+     * @param LinkFamily           $family Family deciding the DTO class
      * @param array<string, mixed> $data
      */
     public function create(LinkFamily $family, array $data): LinkOptionsInterface
@@ -30,6 +33,13 @@ final class OptionsFactory
         };
     }
 
+    /**
+     * Parses a family value into {@see LinkFamily}.
+     *
+     * @param string $family Family value (`contact`, `share`, `map`, `download`)
+     *
+     * @throws InvalidLinkOptionsException When the family is unknown
+     */
     public function tryParseFamily(string $family): LinkFamily
     {
         $parsed = LinkFamily::tryFrom($family);

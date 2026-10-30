@@ -18,16 +18,27 @@ use Nowo\UxLinkBundle\Provider\AbstractLinkProvider;
 #[AsLinkProvider]
 final class EmailContactProvider extends AbstractLinkProvider
 {
+    /**
+     * Returns the contact family.
+     */
     public function getFamily(): LinkFamily
     {
         return LinkFamily::Contact;
     }
 
+    /**
+     * Returns the provider name (`email`).
+     */
     public function getName(): string
     {
         return 'email';
     }
 
+    /**
+     * Builds mailto: contact links from the contact options.
+     *
+     * @param LinkOptionsInterface $options ContactOptions instance
+     */
     public function create(LinkOptionsInterface $options): Link
     {
         \assert($options instanceof ContactOptions);

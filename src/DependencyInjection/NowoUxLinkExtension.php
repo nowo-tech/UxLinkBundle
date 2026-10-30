@@ -15,6 +15,11 @@ use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
  */
 final class NowoUxLinkExtension extends Extension
 {
+    /**
+     * Loads the bundle services and exposes the processed configuration as parameters and as {@see BundleConfiguration}.
+     *
+     * @param array<int, array<string, mixed>> $configs Raw configuration from every config file
+     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
@@ -37,6 +42,9 @@ final class NowoUxLinkExtension extends Extension
         $container->setParameter('nowo_ux_link.templates.download_link', $config['templates']['download_link']);
     }
 
+    /**
+     * Returns the configuration root key (`nowo_ux_link`).
+     */
     public function getAlias(): string
     {
         return 'nowo_ux_link';

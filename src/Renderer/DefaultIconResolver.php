@@ -38,6 +38,11 @@ final class DefaultIconResolver implements IconResolverInterface
         ],
     ];
 
+    /**
+     * Returns the default logical icon of the provider, or null for unknown providers.
+     *
+     * @param Link $link Link to resolve the icon for
+     */
     public function resolve(Link $link): ?string
     {
         return self::DEFAULTS[$link->family->value][$link->provider] ?? null;

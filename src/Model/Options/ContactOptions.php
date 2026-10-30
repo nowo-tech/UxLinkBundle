@@ -12,6 +12,8 @@ use Nowo\UxLinkBundle\Exception\InvalidLinkOptionsException;
 final readonly class ContactOptions implements LinkOptionsInterface
 {
     /**
+     * Creates contact options (recipient is an email address or a phone number depending on the provider).
+     *
      * @param list<string> $cc
      * @param list<string> $bcc
      */
@@ -25,6 +27,11 @@ final readonly class ContactOptions implements LinkOptionsInterface
     ) {
     }
 
+    /**
+     * Builds contact options from a raw array (`recipient`, or `email` / `phone` as aliases).
+     *
+     * @throws InvalidLinkOptionsException When no non-empty recipient is given
+     */
     public static function fromArray(array $data): static
     {
         $recipient = $data['recipient'] ?? $data['email'] ?? $data['phone'] ?? null;

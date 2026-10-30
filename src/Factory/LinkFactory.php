@@ -9,6 +9,8 @@ use Nowo\UxLinkBundle\Contract\IconResolverInterface;
 use Nowo\UxLinkBundle\Contract\LinkFactoryInterface;
 use Nowo\UxLinkBundle\Enum\ExternalTargetPolicy;
 use Nowo\UxLinkBundle\Exception\DisabledProviderException;
+use Nowo\UxLinkBundle\Exception\InvalidLinkOptionsException;
+use Nowo\UxLinkBundle\Exception\ProviderNotFoundException;
 use Nowo\UxLinkBundle\Model\Link;
 use Nowo\UxLinkBundle\Model\LinkAttributes;
 use Nowo\UxLinkBundle\Model\LinkCollection;
@@ -23,6 +25,9 @@ final class LinkFactory implements LinkFactoryInterface
 {
     private const TRANSLATION_DOMAIN = 'NowoUxLinkBundle';
 
+    /**
+     * Wires the provider registry, options factory, configuration, icon resolver and translator used to build links.
+     */
     public function __construct(
         private readonly LinkProviderRegistry $registry,
         private readonly OptionsFactory $optionsFactory,
@@ -32,6 +37,17 @@ final class LinkFactory implements LinkFactoryInterface
     ) {
     }
 
+    /**
+     * Creates one link for a family and provider, applying the bundle defaults (label, icon, target/rel).
+     *
+     * @param string               $family   Family value (`contact`, `share`, `map`, `download`)
+     * @param string               $provider Provider name or configured alias (case-insensitive)
+     * @param array<string, mixed> $options  Family options (e.g. `recipient`, `url`, `latitude`)
+     *
+     * @throws DisabledProviderException   When the family or provider is disabled
+     * @throws InvalidLinkOptionsException When the family is unknown or the options are invalid
+     * @throws ProviderNotFoundException   When no provider is registered under that name
+     */
     public function create(string $family, string $provider, array $options = []): Link
     {
         $familyEnum = $this->optionsFactory->tryParseFamily($family);
@@ -53,6 +69,13 @@ final class LinkFactory implements LinkFactoryInterface
         return $this->applyDefaults($link);
     }
 
+    /**
+     * Creates one link per provider of a family with the same options.
+     *
+     * @param string               $family    Family value
+     * @param list<string>         $providers Provider names or aliases, in display order
+     * @param array<string, mixed> $options   Options shared by every provider
+     */
     public function createMany(string $family, array $providers, array $options = []): LinkCollection
     {
         $collection = new LinkCollection();

@@ -24,6 +24,8 @@ final class LinkProviderRegistry
     private array $providers = [];
 
     /**
+     * Registers every tagged provider once, honouring the configured `priority` for duplicates.
+     *
      * @param iterable<LinkProviderInterface> $providers
      */
     public function __construct(
@@ -38,6 +40,14 @@ final class LinkProviderRegistry
         }
     }
 
+    /**
+     * Returns the provider registered for the family and name.
+     *
+     * @param LinkFamily $family   Link family
+     * @param string     $provider Provider name
+     *
+     * @throws ProviderNotFoundException When no provider is registered
+     */
     public function get(LinkFamily $family, string $provider): LinkProviderInterface
     {
         $resolved = $this->providers[$family->value][$provider] ?? null;
@@ -48,12 +58,20 @@ final class LinkProviderRegistry
         return $resolved;
     }
 
+    /**
+     * Whether a provider is registered for the family and name.
+     *
+     * @param LinkFamily $family   Link family
+     * @param string     $provider Provider name
+     */
     public function has(LinkFamily $family, string $provider): bool
     {
         return isset($this->providers[$family->value][$provider]);
     }
 
     /**
+     * Returns every provider registered for the family.
+     *
      * @return list<LinkProviderInterface>
      */
     public function all(LinkFamily $family): array

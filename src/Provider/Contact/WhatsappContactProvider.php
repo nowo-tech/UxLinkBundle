@@ -19,16 +19,27 @@ use Nowo\UxLinkBundle\Util\UrlBuilder;
 #[AsLinkProvider]
 final class WhatsappContactProvider extends AbstractLinkProvider
 {
+    /**
+     * Returns the contact family.
+     */
     public function getFamily(): LinkFamily
     {
         return LinkFamily::Contact;
     }
 
+    /**
+     * Returns the provider name (`whatsapp`).
+     */
     public function getName(): string
     {
         return 'whatsapp';
     }
 
+    /**
+     * Builds WhatsApp wa.me links (no API calls) from the contact options.
+     *
+     * @param LinkOptionsInterface $options ContactOptions instance
+     */
     public function create(LinkOptionsInterface $options): Link
     {
         /** @var ContactOptions $options */

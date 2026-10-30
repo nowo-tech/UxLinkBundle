@@ -11,6 +11,11 @@ use Nowo\UxLinkBundle\Model\Link;
  */
 final class UrlRenderer
 {
+    /**
+     * Returns the URL of the link.
+     *
+     * @param Link $link Link to render
+     */
     public function render(Link $link): string
     {
         return $link->getUrl();

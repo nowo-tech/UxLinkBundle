@@ -18,16 +18,27 @@ use Nowo\UxLinkBundle\Util\UrlBuilder;
 #[AsLinkProvider]
 final class TelegramShareProvider extends AbstractLinkProvider
 {
+    /**
+     * Returns the share family.
+     */
     public function getFamily(): LinkFamily
     {
         return LinkFamily::Share;
     }
 
+    /**
+     * Returns the provider name (`telegram`).
+     */
     public function getName(): string
     {
         return 'telegram';
     }
 
+    /**
+     * Builds Telegram share links from the share options.
+     *
+     * @param LinkOptionsInterface $options ShareOptions instance
+     */
     public function create(LinkOptionsInterface $options): Link
     {
         /** @var ShareOptions $options */

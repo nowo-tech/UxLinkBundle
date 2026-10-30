@@ -12,6 +12,20 @@ use Nowo\UxLinkBundle\Exception\InvalidLinkOptionsException;
  */
 final readonly class MapOptions implements LinkOptionsInterface
 {
+    /**
+     * Creates map options; coordinates or an address are required, except for a route with origin and destination.
+     *
+     * @param float|null  $latitude      Latitude
+     * @param float|null  $longitude     Longitude
+     * @param string|null $address       Free-text address
+     * @param string|null $label         Link label
+     * @param string|null $origin        Route origin
+     * @param string|null $destination   Route destination
+     * @param string|null $transportMode Provider transport mode (e.g. `driving`)
+     * @param MapAction   $action        View, directions or route
+     *
+     * @throws InvalidLinkOptionsException When neither coordinates nor an address (nor a full route) are given
+     */
     public function __construct(
         public ?float $latitude = null,
         public ?float $longitude = null,
@@ -31,6 +45,9 @@ final readonly class MapOptions implements LinkOptionsInterface
         }
     }
 
+    /**
+     * Builds map options from a raw array (unknown `action` values fall back to `view`; non-numeric coordinates are ignored).
+     */
     public static function fromArray(array $data): static
     {
         $action = MapAction::View;

@@ -8,6 +8,7 @@ use Nowo\UxLinkBundle\Contract\LinkFactoryInterface;
 use Nowo\UxLinkBundle\Contract\LinkRendererInterface;
 use Nowo\UxLinkBundle\Model\LinkAttributes;
 use Nowo\UxLinkBundle\Renderer\UrlRenderer;
+use Nowo\UxLinkBundle\Security\HtmlAttributePolicy;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -16,6 +17,13 @@ use Twig\TwigFunction;
  */
 final class UxLinkExtension extends AbstractExtension
 {
+    /**
+     * Creates the Twig extension.
+     *
+     * @param LinkFactoryInterface  $linkFactory  Factory building links
+     * @param LinkRendererInterface $linkRenderer HTML renderer
+     * @param UrlRenderer           $urlRenderer  URL-only renderer
+     */
     public function __construct(
         private readonly LinkFactoryInterface $linkFactory,
         private readonly LinkRendererInterface $linkRenderer,
@@ -23,6 +31,11 @@ final class UxLinkExtension extends AbstractExtension
     ) {
     }
 
+    /**
+     * Registers `ux_link_url`, `ux_link` and `ux_links` (the HTML functions are safe: output is built from policy-checked URLs and attributes).
+     *
+     * @return list<TwigFunction>
+     */
     public function getFunctions(): array
     {
         return [
@@ -33,6 +46,10 @@ final class UxLinkExtension extends AbstractExtension
     }
 
     /**
+     * Returns only the URL of a link (`ux_link_url()`).
+     *
+     * @param string               $family   Family value
+     * @param string               $provider Provider name or alias
      * @param array<string, mixed> $options
      */
     public function uxLinkUrl(string $family, string $provider, array $options = []): string
@@ -41,6 +58,10 @@ final class UxLinkExtension extends AbstractExtension
     }
 
     /**
+     * Renders one link as HTML (`ux_link()`); extra attributes are filtered by {@see HtmlAttributePolicy}.
+     *
+     * @param string               $family     Family value
+     * @param string               $provider   Provider name or alias
      * @param array<string, mixed> $options
      * @param array<string, mixed> $attributes
      */
@@ -55,6 +76,9 @@ final class UxLinkExtension extends AbstractExtension
     }
 
     /**
+     * Renders one link per provider as concatenated HTML (`ux_links()`).
+     *
+     * @param string               $family    Family value
      * @param list<string>         $providers
      * @param array<string, mixed> $options
      */

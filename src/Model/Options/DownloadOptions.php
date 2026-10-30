@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nowo\UxLinkBundle\Model\Options;
 
 use Nowo\UxLinkBundle\Exception\InvalidLinkOptionsException;
+use Nowo\UxLinkBundle\Exception\InvalidUrlException;
 use Nowo\UxLinkBundle\Security\UrlPolicy;
 
 /**
@@ -12,6 +13,20 @@ use Nowo\UxLinkBundle\Security\UrlPolicy;
  */
 final readonly class DownloadOptions implements LinkOptionsInterface
 {
+    /**
+     * Creates download options; the URL and the preview URL must pass {@see UrlPolicy}.
+     *
+     * @param string      $url         File URL
+     * @param string|null $filename    Suggested file name (`download` attribute)
+     * @param string|null $mimeType    MIME type shown to the user
+     * @param int|null    $size        Size in bytes
+     * @param string|null $checksum    Checksum shown to the user
+     * @param string|null $label       Link label
+     * @param string|null $previewUrl  Optional preview URL
+     * @param string|null $description Optional description
+     *
+     * @throws InvalidUrlException When a URL uses a forbidden scheme
+     */
     public function __construct(
         public string $url,
         public ?string $filename = null,
@@ -28,6 +43,11 @@ final readonly class DownloadOptions implements LinkOptionsInterface
         }
     }
 
+    /**
+     * Builds download options from a raw array (`size` accepts an int or a digit string).
+     *
+     * @throws InvalidLinkOptionsException When no non-empty `url` is given
+     */
     public static function fromArray(array $data): static
     {
         $url = $data['url'] ?? null;

@@ -14,6 +14,9 @@ final class TwigPathsPass implements CompilerPassInterface
 {
     private const TWIG_NAMESPACE = 'NowoUxLinkBundle';
 
+    /**
+     * Registers the `@NowoUxLinkBundle` Twig namespace, with `templates/bundles/NowoUxLinkBundle` first when the application has overrides.
+     */
     public function process(ContainerBuilder $container): void
     {
         $loaderId = $this->getNativeLoaderServiceId($container);

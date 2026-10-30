@@ -17,16 +17,27 @@ use Nowo\UxLinkBundle\Provider\AbstractLinkProvider;
 #[AsLinkProvider]
 final class EmailShareProvider extends AbstractLinkProvider
 {
+    /**
+     * Returns the share family.
+     */
     public function getFamily(): LinkFamily
     {
         return LinkFamily::Share;
     }
 
+    /**
+     * Returns the provider name (`email`).
+     */
     public function getName(): string
     {
         return 'email';
     }
 
+    /**
+     * Builds mailto: share links from the share options.
+     *
+     * @param LinkOptionsInterface $options ShareOptions instance
+     */
     public function create(LinkOptionsInterface $options): Link
     {
         /** @var ShareOptions $options */

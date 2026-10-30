@@ -29,6 +29,13 @@ final class UrlPolicy
         'file',
     ];
 
+    /**
+     * Throws when a user-supplied URL is not allowed by {@see isAllowedUserUrl()}.
+     *
+     * @param string $url User-supplied URL
+     *
+     * @throws InvalidUrlException When the URL is not allowed
+     */
     public static function assertAllowedUserUrl(string $url): void
     {
         if (!self::isAllowedUserUrl($url)) {
@@ -36,6 +43,11 @@ final class UrlPolicy
         }
     }
 
+    /**
+     * Whether a user-supplied URL uses an allowed scheme (http, https, mailto, tel, sms, geo) or is a same-origin absolute path.
+     *
+     * @param string $url User-supplied URL
+     */
     public static function isAllowedUserUrl(string $url): bool
     {
         $scheme = self::extractScheme($url);
@@ -50,6 +62,11 @@ final class UrlPolicy
         return \in_array($scheme, self::ALLOWED_SCHEMES, true);
     }
 
+    /**
+     * Whether the URL is an absolute http(s) URL.
+     *
+     * @param string $url URL to check
+     */
     public static function isExternalHttpUrl(string $url): bool
     {
         $scheme = self::extractScheme($url);
