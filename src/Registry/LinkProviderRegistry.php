@@ -19,12 +19,21 @@ use Nowo\UxLinkBundle\Exception\ProviderNotFoundException;
 final class LinkProviderRegistry
 {
     /**
+     * Namespace of the providers shipped with the bundle (the built-in ones).
+     */
+    private const BUILT_IN_NAMESPACE = 'Nowo\\UxLinkBundle\\Provider\\';
+
+    /**
      * @var array<string, array<string, LinkProviderInterface>>
      */
     private array $providers = [];
 
     /**
-     * Registers every tagged provider once, honouring the configured `priority` for duplicates.
+     * Registers every tagged provider once.
+     *
+     * Providers arrive sorted by tag priority (highest first). For each family and name the first one wins, except
+     * that when `providers.<family>.<name>.priority` is > 0 an application provider replaces the built-in one even if
+     * the built-in one came first.
      *
      * @param iterable<LinkProviderInterface> $providers
      */
@@ -90,11 +99,19 @@ final class LinkProviderRegistry
         }
 
         $existing = $this->providers[$family][$name] ?? null;
-        if (null !== $existing && $priority <= 0) {
+        if (null !== $existing && !($priority > 0 && $this->isBuiltIn($existing) && !$this->isBuiltIn($provider))) {
             return;
         }
 
         // @igor-ignore - Not shared worker service state.
         $this->providers[$family][$name] = $provider;
+    }
+
+    /**
+     * Whether the provider is one of the bundle's built-in providers.
+     */
+    private function isBuiltIn(LinkProviderInterface $provider): bool
+    {
+        return str_starts_with($provider::class, self::BUILT_IN_NAMESPACE);
     }
 }

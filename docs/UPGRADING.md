@@ -3,6 +3,7 @@
 ## Table of contents
 
 - [Unreleased](#unreleased)
+- [To 1.2.2](#to-122)
 - [To 1.2.1](#to-121)
 - [To 1.2.0](#to-120)
 - [To 1.1.6](#to-116)
@@ -22,6 +23,27 @@
   - [1.0.0](#100)
 
 ## Unreleased
+
+## To 1.2.2
+
+From **1.2.1** — fix, no configuration change.
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
+
+- Application services with `autoconfigure: true` that carry `#[AsLinkProvider]` are now registered as providers
+  without an explicit `nowo_ux_link.provider` tag. Explicit tags keep working as before (a provider tagged twice is
+  registered once, and the explicit tag's priority overrides the attribute's).
+- `#[AsLinkProvider(priority: N)]` is now honoured. With `N > 0` your provider replaces the built-in one with the same
+  family and name (e.g. `#[AsLinkProvider(priority: 10)]` on your own `contact` / `email` provider). With the default
+  `0` (or less) the built-in provider wins the tie, so the attribute alone only adds **new** names.
+- Implementing `LinkProviderInterface` without the attribute or a tag still does **not** register the service, as in
+  1.2.1: a leftover class, a test double or another bundle's implementer never replaces a built-in provider, and an
+  implementer with a constructor that cannot be autowired does not break the container compilation.
+- `providers.<family>.<name>.priority: N` (N > 0) now does what `docs/CONFIGURATION.md` says: an application provider
+  with that family and name replaces the built-in one. Before, the built-in provider won. If you set it and relied on
+  the built-in provider staying active, remove the option (or the application provider).
 
 ## To 1.2.1
 
