@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Table of contents
 
 - [[Unreleased]](#unreleased)
+- [[1.2.2] - 2026-11-10](#122---2026-11-10)
 - [[1.2.1] - 2026-10-28](#121---2026-10-28)
 - [[1.2.0] - 2026-10-13](#120---2026-10-13)
 - [[1.1.6] - 2026-10-09](#116---2026-10-09)
@@ -28,7 +29,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Target 1.2.2.
+## [1.2.2] - 2026-11-10
+
+`#[AsLinkProvider]` is autoconfigured and a config `priority` above 0 replaces a built-in provider, as documented. See [UPGRADING](https://github.com/nowo-tech/UxLinkBundle/blob/v1.2.2/docs/UPGRADING.md#to-122).
 
 ### Fixed
 
@@ -51,6 +54,8 @@ Target 1.2.2.
 ### Changed
 
 - **Docs (REQ-CS-001):** every public class and public method in `src/` now has an English PHPDoc description (132 methods; `@param` / `@return` / `@throws` where they add information beyond the native types). No code or behaviour change.
+
+[1.2.2]: https://github.com/nowo-tech/UxLinkBundle/releases/tag/v1.2.2
 
 ## [1.2.1] - 2026-10-28
 
