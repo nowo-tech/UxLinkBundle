@@ -27,14 +27,12 @@ final class NowoUxLinkExtensionTest extends TestCase
         self::assertTrue($container->hasDefinition('Nowo\\UxLinkBundle\\Factory\\LinkFactory'));
     }
 
-    public function testLoadAutoconfiguresProviderInterfaceAndAttribute(): void
+    public function testLoadAutoconfiguresTheAttributeButNotTheBareInterface(): void
     {
         $container = new ContainerBuilder();
         (new NowoUxLinkExtension())->load([[]], $container);
 
-        $instanceof = $container->getAutoconfiguredInstanceof();
-        self::assertArrayHasKey(LinkProviderInterface::class, $instanceof);
-        self::assertSame([[]], $instanceof[LinkProviderInterface::class]->getTag(NowoUxLinkExtension::PROVIDER_TAG));
+        self::assertArrayNotHasKey(LinkProviderInterface::class, $container->getAutoconfiguredInstanceof());
 
         $configurators = $container->getAttributeAutoconfigurators();
         self::assertArrayHasKey(AsLinkProvider::class, $configurators);
@@ -44,6 +42,21 @@ final class NowoUxLinkExtensionTest extends TestCase
             $configurator($definition, new AsLinkProvider(priority: 7));
         }
         self::assertSame([['priority' => 7]], $definition->getTag(NowoUxLinkExtension::PROVIDER_TAG));
+
+        $definition = new ChildDefinition('');
+        foreach ($configurators[AsLinkProvider::class] as $configurator) {
+            $configurator($definition, new AsLinkProvider());
+        }
+        self::assertSame([['priority' => -1]], $definition->getTag(NowoUxLinkExtension::PROVIDER_TAG));
+    }
+
+    public function testTagPriorityLetsBuiltInProvidersWinTies(): void
+    {
+        self::assertSame(10, NowoUxLinkExtension::tagPriority(10));
+        self::assertSame(1, NowoUxLinkExtension::tagPriority(1));
+        self::assertSame(-1, NowoUxLinkExtension::tagPriority(0));
+        self::assertSame(-6, NowoUxLinkExtension::tagPriority(-5));
+        self::assertSame(\PHP_INT_MIN, NowoUxLinkExtension::tagPriority(\PHP_INT_MIN));
     }
 
     public function testAlias(): void

@@ -14,7 +14,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
- * Application providers with only #[AsLinkProvider] or only the interface (autoconfigure, no explicit tag) are registered.
+ * Application providers with only #[AsLinkProvider] (autoconfigure, no explicit tag) are registered; implementing the
+ * interface alone does not register a provider.
  */
 #[CoversNothing]
 final class HostProviderAutoconfigurationIntegrationTest extends KernelTestCase
@@ -32,14 +33,14 @@ final class HostProviderAutoconfigurationIntegrationTest extends KernelTestCase
         self::assertSame('mailto:host@example.com', $factory->create('contact', 'email', ['recipient' => 'a@example.com'])->url);
     }
 
-    public function testInterfaceOnlyProviderIsRegistered(): void
+    public function testInterfaceOnlyProviderIsNotRegistered(): void
     {
         self::bootKernel();
 
         /** @var LinkProviderRegistry $registry */
         $registry = self::getContainer()->get(LinkProviderRegistry::class);
-        self::assertInstanceOf(InterfaceOnlyProvider::class, $registry->get(LinkFamily::Share, 'mastodon'));
-        self::assertCount(1, array_filter(
+        self::assertFalse($registry->has(LinkFamily::Share, 'mastodon'));
+        self::assertCount(0, array_filter(
             $registry->all(LinkFamily::Share),
             static fn (object $provider): bool => $provider instanceof InterfaceOnlyProvider,
         ));

@@ -6,7 +6,6 @@ namespace Nowo\UxLinkBundle\DependencyInjection;
 
 use Nowo\UxLinkBundle\Attribute\AsLinkProvider;
 use Nowo\UxLinkBundle\Config\BundleConfiguration;
-use Nowo\UxLinkBundle\Contract\LinkProviderInterface;
 use Nowo\UxLinkBundle\Registry\LinkProviderRegistry;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
@@ -37,15 +36,14 @@ final class NowoUxLinkExtension extends Extension
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.php');
 
-        // Application services (autoconfigure: true) implementing the interface or carrying #[AsLinkProvider] join the
-        // registry without an explicit tag. The attribute's priority orders the tagged iterator, so a provider with a
-        // higher priority is registered first and wins over another provider with the same family and name.
-        $container->registerForAutoconfiguration(LinkProviderInterface::class)
-            ->addTag(self::PROVIDER_TAG);
+        // Application services (autoconfigure: true) carrying #[AsLinkProvider] join the registry without an explicit tag.
+        // Implementing LinkProviderInterface alone is NOT enough (as in 1.2.1): an unrelated implementer (test double,
+        // leftover class, another bundle's service) must never shadow a built-in provider, and a never-used implementer
+        // with a non-autowirable constructor must not break container compilation.
         $container->registerAttributeForAutoconfiguration(
             AsLinkProvider::class,
             static function (ChildDefinition $definition, AsLinkProvider $attribute): void {
-                $definition->addTag(self::PROVIDER_TAG, ['priority' => $attribute->priority]);
+                $definition->addTag(self::PROVIDER_TAG, ['priority' => self::tagPriority($attribute->priority)]);
             },
         );
 
@@ -61,6 +59,24 @@ final class NowoUxLinkExtension extends Extension
         $container->setParameter('nowo_ux_link.templates.links', $config['templates']['links']);
         $container->setParameter('nowo_ux_link.templates.share_links', $config['templates']['share_links']);
         $container->setParameter('nowo_ux_link.templates.download_link', $config['templates']['download_link']);
+    }
+
+    /**
+     * Maps an {@see AsLinkProvider} priority to the `nowo_ux_link.provider` tag priority.
+     *
+     * The built-in providers are tagged with priority 0. A positive attribute priority is kept, so it sorts before
+     * (and replaces) the built-in provider with the same family and name. Zero and negative priorities are lowered by
+     * one, so the built-in provider wins the tie: `#[AsLinkProvider]` without a priority only adds new names.
+     *
+     * @param int $priority Attribute priority
+     */
+    public static function tagPriority(int $priority): int
+    {
+        if ($priority > 0) {
+            return $priority;
+        }
+
+        return \PHP_INT_MIN === $priority ? $priority : $priority - 1;
     }
 
     /**

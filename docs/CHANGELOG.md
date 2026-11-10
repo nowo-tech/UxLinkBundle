@@ -35,9 +35,18 @@ Target 1.2.2.
 - **`#[AsLinkProvider]` is autoconfigured.** `docs/USAGE.md` documented the attribute as a way to register a custom
   provider, but `NowoUxLinkExtension` never registered it for autoconfiguration: an application provider carrying only
   the attribute (no explicit `nowo_ux_link.provider` tag) was silently ignored and `AsLinkProvider::$priority` was never
-  read. The extension now registers the attribute (tag `nowo_ux_link.provider` with the attribute's `priority`) and the
-  `LinkProviderInterface` (tag `nowo_ux_link.provider`) for autoconfiguration. A provider with a higher priority is
-  iterated first, so it wins over another provider with the same family and name (the built-in ones have priority 0).
+  read. The extension now registers the attribute for autoconfiguration (tag `nowo_ux_link.provider`). Precedence for
+  a family and name: a higher priority is registered first and the first one wins; the built-in providers have
+  priority 0 and **win ties**, so only `#[AsLinkProvider(priority: N > 0)]` replaces a built-in provider, and
+  `#[AsLinkProvider]` with priority 0 or less only adds new names. Implementing `LinkProviderInterface` alone still does
+  **not** register a service (as in 1.2.1), so an unrelated or unused implementer never shadows a built-in provider
+  and never breaks the container compilation. Explicit tags behave as in 1.2.1; an explicit tag's priority overrides
+  the attribute's.
+- **`providers.<family>.<name>.priority` > 0 now replaces the built-in provider** with your own one, as
+  `docs/CONFIGURATION.md` documents. Since 1.0.0 it made every later provider replace the earlier one, so the built-in
+  provider (iterated last) won and the application provider lost. The registry now keeps an application provider over
+  the built-in one for that name, whatever the order; between several application providers, the first one (highest
+  tag priority) wins.
 
 ### Changed
 

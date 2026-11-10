@@ -19,7 +19,7 @@ nowo_ux_link:
                 enabled: true
                 icon: 'tabler:brand-x'   # overrides the resolved icon (null = DefaultIconResolver)
                 label: 'Post on X'       # overrides the translated label (null = <family>.<provider>.label)
-                priority: 0              # > 0 lets a custom provider with the same family/name replace the built-in one
+                priority: 0              # > 0: an application provider with the same family/name replaces the built-in one
     aliases:
         share:
             twitter: x                   # ux_link('share', 'twitter') resolves to the "x" provider
@@ -70,7 +70,7 @@ Map keyed by family, then provider name. Built-in providers:
 | `enabled` | `true` | `false` makes `create()` throw `DisabledProviderException` for that provider. |
 | `icon` | `null` | Icon name used instead of `DefaultIconResolver`. |
 | `label` | `null` | Label used instead of the translated `<family>.<provider>.label`. An explicit `label` option on the link still wins. |
-| `priority` | `0` | When two providers share family + name, the first registered wins unless the later one has `priority > 0`. Use it to replace a built-in provider with your own `#[AsLinkProvider]` service. |
+| `priority` | `0` | When two providers share family + name, the first registered wins. With `priority > 0`, an application provider (registered with `#[AsLinkProvider]` or the `nowo_ux_link.provider` tag) replaces the built-in one with that name, whatever the order. `#[AsLinkProvider(priority: N > 0)]` alone also replaces it. |
 
 ## aliases
 

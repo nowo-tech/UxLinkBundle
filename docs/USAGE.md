@@ -31,7 +31,7 @@ $link = $linkFactory->create('share', 'linkedin', ['url' => 'https://example.com
 
 ## Custom providers
 
-Implement `LinkProviderInterface` (or extend `Provider\AbstractLinkProvider`). With `autoconfigure: true` (the Symfony default for `App\` services) the service is registered automatically; add `#[AsLinkProvider]` to set a priority, or tag the service with `nowo_ux_link.provider` when it is not autoconfigured. Do **not** mutate `LinkProviderRegistry` at runtime — registration is constructor-only (FrankenPHP worker safe).
+Implement `LinkProviderInterface` (or extend `Provider\AbstractLinkProvider`) and register the service with `#[AsLinkProvider]` (services with `autoconfigure: true`, the Symfony default for `App\` services) or with the `nowo_ux_link.provider` tag. Implementing the interface alone does **not** register the service. Do **not** mutate `LinkProviderRegistry` at runtime — registration is constructor-only (FrankenPHP worker safe).
 
 ```php
 use Nowo\UxLinkBundle\Attribute\AsLinkProvider;
@@ -49,9 +49,15 @@ final class MyXShareProvider extends AbstractLinkProvider
 }
 ```
 
-When two providers share a family and name, the one with the higher priority (attribute `priority`, or the tag's
-`priority` attribute) is registered; with equal priority the first one wins. `providers.<family>.<name>.priority` in the
-bundle configuration still forces a replacement as before.
+When two providers share a family and name:
+
+- Providers are registered in tag priority order (highest first) and the **first** one wins.
+- The built-in providers have priority 0 and win ties: `#[AsLinkProvider]` with priority 0 (the default) or less only
+  adds new names; `#[AsLinkProvider(priority: N > 0)]` replaces a built-in provider.
+- An explicit tag's `priority` overrides the attribute's (Symfony uses the first tag). An explicitly tagged provider
+  with priority 0 is registered before the built-in one and replaces it, as in 1.2.1.
+- `providers.<family>.<name>.priority: N > 0` in the bundle configuration makes an application provider replace the
+  built-in one with that name, however it was registered.
 
 ## Using it from a DDD / hexagonal application
 
@@ -65,7 +71,8 @@ listeners, so your domain never depends on it.
   `Nowo\UxLinkBundle\Contract\LinkFactoryInterface` and `Contract\LinkRendererInterface`.
 - `Model\Link`, `LinkCollection` and the options DTOs are `readonly` value objects; you can pass them to templates safely.
 - Extension points: implement `Contract\LinkProviderInterface` (or extend `Provider\AbstractLinkProvider`) for a new
-  provider inside an existing family (autoconfigured, see [Custom providers](#custom-providers)), and re-alias
+  provider inside an existing family (register it with `#[AsLinkProvider]` or the tag, see
+  [Custom providers](#custom-providers)), and re-alias
   `Contract\IconResolverInterface` to change icons.
 
 ```yaml
