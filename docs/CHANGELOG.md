@@ -28,6 +28,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+Target 1.2.2.
+
+### Fixed
+
+- **`#[AsLinkProvider]` is autoconfigured.** `docs/USAGE.md` documented the attribute as a way to register a custom
+  provider, but `NowoUxLinkExtension` never registered it for autoconfiguration: an application provider carrying only
+  the attribute (no explicit `nowo_ux_link.provider` tag) was silently ignored and `AsLinkProvider::$priority` was never
+  read. The extension now registers the attribute (tag `nowo_ux_link.provider` with the attribute's `priority`) and the
+  `LinkProviderInterface` (tag `nowo_ux_link.provider`) for autoconfiguration. A provider with a higher priority is
+  iterated first, so it wins over another provider with the same family and name (the built-in ones have priority 0).
+
 ### Changed
 
 - **Docs (REQ-CS-001):** every public class and public method in `src/` now has an English PHPDoc description (132 methods; `@param` / `@return` / `@throws` where they add information beyond the native types). No code or behaviour change.

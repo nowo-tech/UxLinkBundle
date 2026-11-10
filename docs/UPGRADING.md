@@ -3,6 +3,7 @@
 ## Table of contents
 
 - [Unreleased](#unreleased)
+- [To 1.2.2](#to-122)
 - [To 1.2.1](#to-121)
 - [To 1.2.0](#to-120)
 - [To 1.1.6](#to-116)
@@ -22,6 +23,23 @@
   - [1.0.0](#100)
 
 ## Unreleased
+
+## To 1.2.2
+
+From **1.2.1** — fix, no configuration change.
+
+```bash
+composer update nowo-tech/ux-link-bundle
+```
+
+- Application services with `autoconfigure: true` that implement `LinkProviderInterface` or carry `#[AsLinkProvider]`
+  are now registered as providers without an explicit `nowo_ux_link.provider` tag. Explicit tags keep working (the
+  registry keeps one provider per family and name, so a provider tagged twice is registered once).
+- `#[AsLinkProvider(priority: N)]` is now honoured: a provider with a higher priority wins over another one with the same
+  family and name, e.g. `#[AsLinkProvider(priority: 10)]` on your own `contact` / `email` provider replaces the built-in
+  one. The `providers.<family>.<name>.priority` config option keeps working as before.
+- If you had a class implementing `LinkProviderInterface` that you did **not** want registered, exclude it from
+  autoconfiguration (`autoconfigure: false` on that service).
 
 ## To 1.2.1
 

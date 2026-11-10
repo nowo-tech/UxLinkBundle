@@ -6,6 +6,7 @@
 - [Twig functions](#twig-functions)
 - [Twig Components](#twig-components)
 - [Custom providers](#custom-providers)
+- [Using it from a DDD / hexagonal application](#using-it-from-a-ddd--hexagonal-application)
 - [FrankenPHP worker mode](#frankenphp-worker-mode)
 - [Overriding templates (REQ-TWIG-001)](#overriding-templates-req-twig-001)
 
@@ -30,7 +31,55 @@ $link = $linkFactory->create('share', 'linkedin', ['url' => 'https://example.com
 
 ## Custom providers
 
-Implement `LinkProviderInterface` and tag the service with `nowo_ux_link.provider` (or `#[AsLinkProvider]`). Do **not** mutate `LinkProviderRegistry` at runtime — registration is constructor-only (FrankenPHP worker safe).
+Implement `LinkProviderInterface` (or extend `Provider\AbstractLinkProvider`). With `autoconfigure: true` (the Symfony default for `App\` services) the service is registered automatically; add `#[AsLinkProvider]` to set a priority, or tag the service with `nowo_ux_link.provider` when it is not autoconfigured. Do **not** mutate `LinkProviderRegistry` at runtime — registration is constructor-only (FrankenPHP worker safe).
+
+```php
+use Nowo\UxLinkBundle\Attribute\AsLinkProvider;
+use Nowo\UxLinkBundle\Enum\LinkFamily;
+use Nowo\UxLinkBundle\Model\Link;
+use Nowo\UxLinkBundle\Model\Options\LinkOptionsInterface;
+use Nowo\UxLinkBundle\Provider\AbstractLinkProvider;
+
+#[AsLinkProvider(priority: 10)] // > 0: replaces the built-in share/x provider
+final class MyXShareProvider extends AbstractLinkProvider
+{
+    public function getFamily(): LinkFamily { return LinkFamily::Share; }
+    public function getName(): string { return 'x'; }
+    public function create(LinkOptionsInterface $options): Link { /* ... */ }
+}
+```
+
+When two providers share a family and name, the one with the higher priority (attribute `priority`, or the tag's
+`priority` attribute) is registered; with equal priority the first one wins. `providers.<family>.<name>.priority` in the
+bundle configuration still forces a replacement as before.
+
+## Using it from a DDD / hexagonal application
+
+UX Link is a **presentation-layer** bundle: it turns scalar input (an email, a phone number, a URL, coordinates)
+into immutable `Link` value objects and renders them in Twig. It has no Doctrine dependency, no entities and no
+listeners, so your domain never depends on it.
+
+- Keep the domain free of it: expose plain values (e.g. `$contact->email()->toString()`) to your view model or
+  controller and build links there, or directly in Twig with `ux_link()` / `<twig:UxLink />`.
+- From PHP, depend on the interfaces, not the concrete classes:
+  `Nowo\UxLinkBundle\Contract\LinkFactoryInterface` and `Contract\LinkRendererInterface`.
+- `Model\Link`, `LinkCollection` and the options DTOs are `readonly` value objects; you can pass them to templates safely.
+- Extension points: implement `Contract\LinkProviderInterface` (or extend `Provider\AbstractLinkProvider`) for a new
+  provider inside an existing family (autoconfigured, see [Custom providers](#custom-providers)), and re-alias
+  `Contract\IconResolverInterface` to change icons.
+
+```yaml
+# config/services.yaml — only needed when the service is not autoconfigured
+App\Ui\Link\MastodonShareProvider:
+    autoconfigure: false
+    tags: [{ name: 'nowo_ux_link.provider', priority: 0 }]
+```
+
+### Known limitations
+
+- Families are fixed (`contact`, `share`, `map`, `download`); a provider cannot add a new family or options type.
+- The factory API is string-based (`create(string $family, string $provider, array $options)`); the typed options DTOs
+  are built internally.
 
 ## FrankenPHP worker mode
 
