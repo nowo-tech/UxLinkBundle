@@ -47,8 +47,8 @@ final class WorkerKeptAliveKernelTest extends KernelTestCase
         $baseline = 0;
         for ($i = 0; $i < self::ITERATIONS; ++$i) {
             if (self::WARM_UP === $i) {
-                \gc_collect_cycles();
-                $baseline = \memory_get_usage();
+                gc_collect_cycles();
+                $baseline = memory_get_usage();
             }
 
             $who = 0 === $i % 2 ? 'alpha' : 'beta';
@@ -62,12 +62,12 @@ final class WorkerKeptAliveKernelTest extends KernelTestCase
             self::assertStringContainsString($data['css'], $html, \sprintf('iteration %d', $i));
             self::assertStringContainsString($data['subject'], $html, \sprintf('iteration %d', $i));
             foreach ($users[$other] as $value) {
-                self::assertFalse(\str_contains($html, $value), \sprintf('iteration %d: "%s" of the other user in output', $i, $value));
+                self::assertFalse(str_contains($html, $value), \sprintf('iteration %d: "%s" of the other user in output', $i, $value));
             }
         }
 
-        \gc_collect_cycles();
-        $growth = \memory_get_usage() - $baseline;
+        gc_collect_cycles();
+        $growth = memory_get_usage() - $baseline;
         self::assertLessThan(self::MARGIN, $growth, \sprintf('memory grew by %d bytes over %d iterations', $growth, self::ITERATIONS - self::WARM_UP));
     }
 }
