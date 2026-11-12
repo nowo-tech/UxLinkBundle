@@ -3,8 +3,8 @@
 | Field | Value |
 |-------|-------|
 | Package | `nowo-tech/ux-link-bundle` (`symfony-bundle`) |
-| Audited revision | `v1.1.4` |
-| Audit date | 2026-09-25 |
+| Audited revision | `v1.2.2` (kept-alive test and rule-7 note added 2026-11-12; earlier manual review kept below) |
+| Audit date | 2026-11-12 (first audit 2026-09) |
 | Method | Manual review of every file under `src/` (services, providers, Twig extension and components, DI extension, compiler pass, `Resources/config/services.php`) + PHPStan FrankenPHP rulesets |
 | **Verdict** | ✅ **PASS** — safe under scenario B (`reset_kernel` false / no `services_resetter`) |
 
@@ -14,6 +14,7 @@
 - [Summary](#summary)
 - [Services reviewed](#services-reviewed)
 - [Findings](#findings)
+- [Kept-alive test (REQ-RUNTIME-002)](#kept-alive-test-req-runtime-002)
 - [Usage recommendations in worker mode](#usage-recommendations-in-worker-mode)
 - [Re-audit triggers](#re-audit-triggers)
 
@@ -58,6 +59,19 @@ A bundle that is safe under **B** is safe under **A** and under classic mode / P
 ## Findings
 
 No open findings. Former **W-01** (`LinkProviderRegistry::add()` public mutator) was resolved in **1.1.4** by making registration private and constructor-only.
+
+## Kept-alive test (REQ-RUNTIME-002)
+
+Test: `Nowo\UxLinkBundle\Tests\Integration\Worker\WorkerKeptAliveKernelTest` (`tests/Integration/Worker/WorkerKeptAliveKernelTest.php`). It uses one booted production-like kernel (`TestKernel`, debug off: with debug on Symfony itself retains per-render data, a development-only cost; never shut down or reset) and one kept Twig environment rendering `ux_link()`, `ux_link_url()`, `ux_links()` and the `UxLink` component for two users that each have their own recipient, subject, label and CSS class. `services_resetter` / `kernel.reset` is **never** called. It runs 1,200 iterations alternating the two inputs, asserts every response carries its own recipient, subject, label and class (the non-shared `UxLink` component does not keep the previous link), and that memory growth after a 100-iteration warm-up stays below 4 MiB.
+
+| Service | State kept between requests | Reset mechanism |
+|---------|-----------------------------|-----------------|
+| `Registry\LinkProviderRegistry`, providers, `Factory\LinkFactory`, `Renderer\*`, `Twig\UxLinkExtension` | none (readonly collaborators; every call builds immutable `Link` values) | none needed |
+| `Twig\Component\UxLink`, `UxLinks`, `UxShareLinks`, `UxDownloadLink` | per-render `$link` set in `mount()`, services are **non-shared** (`share(false)`), so every render gets a fresh instance | non-shared service definitions |
+
+Result: no request data is carried between requests, so the bundle is **safe with kernel reset false**.
+
+Rule 7: the bundle never clears or resets the host's default EntityManager (it uses no persistence).
 
 ## Usage recommendations in worker mode
 
