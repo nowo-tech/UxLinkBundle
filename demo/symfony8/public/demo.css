@@ -1,0 +1,15 @@
+/* Demo-only layout for the bundle's own components (UiKit has no equivalent); tokens are UiKit's, never redefined. */
+.ux-share-links__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ux-download-link {
+    border: 1px solid var(--nowo-ui-border);
+    border-radius: var(--nowo-ui-radius);
+    padding: 1rem;
+}
