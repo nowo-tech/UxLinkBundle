@@ -32,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Demo uses the UiKit base style and FormKit forms (REQ-DEMO-014/015). The bundle demo has no forms, so only the UiKit shell applies.
+- CI: `Demo smoke` workflow (weekly, `v*` tags, manual) runs `make demo-smoke`, which now boots the demo and checks HTTP 200 (`demo release-verify`); documented in `docs/DEMO-FRANKENPHP.md` (REQ-TEST-011)
+- CI: Dependabot npm updates for `demo/symfony8/e2e` (REQ-GH-002)
+- Docs: `docs/DEMO-FRANKENPHP.md` gives the Symfony 8 demo port 8048 (was 8047)
 
 ### Tests
 

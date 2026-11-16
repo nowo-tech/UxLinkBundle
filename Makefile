@@ -134,7 +134,7 @@ check-open-prs:
 	@GH_REPO=nowo-tech/UxLinkBundle ./.scripts/check-open-prs.sh
 
 demo-smoke:
-	@if [ -f demo/Makefile ]; then $(MAKE) -C demo release-check; else echo "No demo/Makefile — skip demo-smoke"; fi
+	@if [ -f demo/Makefile ]; then $(MAKE) -C demo release-verify; else echo "No demo/Makefile — skip demo-smoke"; fi
 
 strip-cursor-coauthor-from-history:
 	@chmod +x .scripts/strip-cursor-coauthor-from-history.sh
