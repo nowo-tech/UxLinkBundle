@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Demo: aligned with UiKit. `demo.css` is down to the share-links list reset (the bundle's own markup, no UiKit equivalent); the download card no longer has a second border inside its UiKit card; `demo-nav-*` test id and the `· Symfony 8` brand and title suffix.
 - Demo uses the UiKit base style and FormKit forms (REQ-DEMO-014/015). The bundle demo has no forms, so only the UiKit shell applies.
 - CI: `Demo smoke` workflow (weekly, `v*` tags, manual) runs `make demo-smoke`, which now boots the demo and checks HTTP 200 (`demo release-verify`); documented in `docs/DEMO-FRANKENPHP.md` (REQ-TEST-011)
 - CI: Dependabot npm updates for `demo/symfony8/e2e` (REQ-GH-002)
