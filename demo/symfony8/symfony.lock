@@ -2,6 +2,9 @@
     "nowo-tech/twig-inspector-bundle": {
         "version": "v1.0.33"
     },
+    "nowo-tech/ui-kit-bundle": {
+        "version": "v2.63.0"
+    },
     "nowo-tech/ux-link-bundle": {
         "version": "dev-main"
     },
