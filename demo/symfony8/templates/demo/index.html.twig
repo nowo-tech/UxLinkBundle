@@ -7,44 +7,40 @@
 {% endblock %}
 
 {% block body %}
-    <section class="nowo-ui-card" id="contact-whatsapp">
-        <div class="nowo-ui-card__body">
-            <h2 class="nowo-ui-card__title">Contact — WhatsApp</h2>
+    {% embed '@NowoUiKit/demo_platform/_section.html.twig' with {title: 'Contact — WhatsApp', kind: 'content', testid: 'contact-whatsapp'} %}
+        {% block section_body %}
             <twig:UxLink
                 family="contact"
                 provider="whatsapp"
                 recipient="+34600111222"
                 message="Hello from the UX Link demo"
             />
-        </div>
-    </section>
+        {% endblock %}
+    {% endembed %}
 
-    <section class="nowo-ui-card" id="share-links">
-        <div class="nowo-ui-card__body">
-            <h2 class="nowo-ui-card__title">Share links</h2>
+    {% embed '@NowoUiKit/demo_platform/_section.html.twig' with {title: 'Share links', kind: 'content', testid: 'share-links'} %}
+        {% block section_body %}
             <twig:UxShareLinks
                 url="https://example.com/article"
                 title="UX Link Bundle"
                 text="Check out this Symfony bundle"
                 :providers="['linkedin', 'x', 'whatsapp', 'telegram', 'email']"
             />
-        </div>
-    </section>
+        {% endblock %}
+    {% endembed %}
 
-    <section class="nowo-ui-card" id="map-link">
-        <div class="nowo-ui-card__body">
-            <h2 class="nowo-ui-card__title">Map — OpenStreetMap</h2>
+    {% embed '@NowoUiKit/demo_platform/_section.html.twig' with {title: 'Map — OpenStreetMap', kind: 'content', testid: 'map-link'} %}
+        {% block section_body %}
             <twig:UxLink
                 family="map"
                 provider="openstreetmap"
                 :options="{ address: 'Madrid, Spain', label: 'Open in OpenStreetMap' }"
             />
-        </div>
-    </section>
+        {% endblock %}
+    {% endembed %}
 
-    <section class="nowo-ui-card" id="download-link">
-        <div class="nowo-ui-card__body">
-            <h2 class="nowo-ui-card__title">Download</h2>
+    {% embed '@NowoUiKit/demo_platform/_section.html.twig' with {title: 'Download', kind: 'content', testid: 'download-link'} %}
+        {% block section_body %}
             <twig:UxDownloadLink
                 url="https://example.com/sample.pdf"
                 filename="sample.pdf"
@@ -53,6 +49,6 @@
                 label="Download sample PDF"
                 description="Example enriched download card from the demo."
             />
-        </div>
-    </section>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

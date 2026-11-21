@@ -15,10 +15,11 @@ final class DemoControllerTest extends WebTestCase
 
         self::assertResponseIsSuccessful();
         self::assertSelectorTextContains('h1', 'UX Link Bundle Demo');
-        self::assertSelectorExists('#contact-whatsapp a[href*="wa.me"]');
-        self::assertSelectorExists('#share-links .ux-share-links');
-        self::assertSelectorExists('#map-link a[href*="openstreetmap"]');
-        self::assertSelectorExists('#download-link .ux-download-link');
-        self::assertSelectorExists('#download-link a[href*="sample.pdf"]');
+        self::assertSelectorExists('[data-testid="demo-platform"]');
+        self::assertSelectorExists('[data-testid="contact-whatsapp"] a[href*="wa.me"]');
+        self::assertSelectorExists('[data-testid="share-links"] .ux-share-links');
+        self::assertSelectorExists('[data-testid="map-link"] a[href*="openstreetmap"]');
+        self::assertSelectorExists('[data-testid="download-link"] .ux-download-link');
+        self::assertSelectorExists('[data-testid="download-link"] a[href*="sample.pdf"]');
     }
 }
