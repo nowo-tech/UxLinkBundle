@@ -6,7 +6,8 @@ return (new PhpCsFixer\Config())
     ->setParallelConfig(new PhpCsFixer\Runner\Parallel\ParallelConfig(2))
     ->setRiskyAllowed(true)
     ->setRules([
-        '@PSR12' => true,
+        '@PER-CS' => true,
+        '@PER-CS:risky' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
         'declare_strict_types' => true,
