@@ -3,7 +3,7 @@
 # Prefer Compose V2 plugin (GitHub Actions / modern Docker Desktop); fall back to docker-compose V1 (REQ-MAKE-010).
 COMPOSE ?= $(shell docker compose version >/dev/null 2>&1 && echo "docker compose" || echo "docker-compose")
 
-.PHONY: help up down build install shell logs test test-coverage cache-clear update-bundle ensure-up verify
+.PHONY: wait-ready help up down build install shell logs test test-coverage cache-clear update-bundle ensure-up verify
 
 help:
 	@echo "UX Link Bundle — Symfony 8.1 demo"
@@ -11,11 +11,20 @@ help:
 	@echo "  make test / verify / update-bundle"
 	@echo "  make test-e2e / demo-screenshots — Playwright e2e + README WebP screenshots (REQ-DEMO-013)"
 
+# The entrypoint runs its own `composer install` on a fresh checkout and only then starts FrankenPHP. A second install
+# started at the same time rewrites vendor/ under the worker: it fails to boot, FrankenPHP exits and `exec` ends with 137.
+# Wait for FrankenPHP (entrypoint finished) first; the explicit `composer install` is then a no-op.
+wait-ready:
+	@i=0; until $(COMPOSE) exec -T php pgrep frankenphp >/dev/null 2>&1; do \
+		i=$$((i+1)); [ $$i -le 180 ] || { echo "FrankenPHP did not start in time" >&2; $(COMPOSE) logs --tail 40 php >&2; exit 1; }; \
+		sleep 2; \
+	done
+
 up:
 	@if [ ! -f .env ]; then cp .env.example .env 2>/dev/null || true; fi
 	$(COMPOSE) up -d
 	@echo "Waiting for container to be ready..."
-	@sleep 5
+	@$(MAKE) --no-print-directory wait-ready
 	@echo "Installing dependencies..."
 	@$(COMPOSE) exec -T -e COMPOSER_MEMORY_LIMIT=-1 php composer install --no-interaction
 	@PORT=$$(grep "^PORT=" .env 2>/dev/null | cut -d= -f2 | tr -d '\r'); \
@@ -36,7 +45,7 @@ ensure-up:
 	@if ! $(COMPOSE) ps --status running --services 2>/dev/null | grep -qx php; then \
 		echo "Starting demo container..."; \
 		$(COMPOSE) up -d --build; \
-		sleep 8; \
+		$(MAKE) --no-print-directory wait-ready; \
 		$(COMPOSE) exec -T -e COMPOSER_MEMORY_LIMIT=-1 php composer install --no-interaction; \
 	fi
 
