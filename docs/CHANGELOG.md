@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- PHP 8.6 and Symfony 8.2 support in CI (both stable, no allowed failures): `composer.json` allows PHP below 8.7 (was below 8.6) and a forward-compatibility workflow runs the suite on PHP 8.6 and on Symfony 8.2.
 - Demo: runs in UiKit's demo platform shell (`nowo-tech/ui-kit-bundle` ^2.60); the demo's own header and `public/demo.css` are gone, the page uses the shell page header and section cards. The README screenshot spec no longer shows the Symfony toolbar. Demo only, no bundle change.
 - Demo: aligned with UiKit. `demo.css` is down to the share-links list reset (the bundle's own markup, no UiKit equivalent); the download card no longer has a second border inside its UiKit card; `demo-nav-*` test id and the `· Symfony 8` brand and title suffix.
 - Demo uses the UiKit base style and FormKit forms (REQ-DEMO-014/015). The bundle demo has no forms, so only the UiKit shell applies.
